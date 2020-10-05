@@ -5,13 +5,14 @@
     <title>Danh sách khách hàng</title>
 </head>
 <body>
-<a th:href="@{/customer/create}">Add new customer</a>
+<a th:href="@{/customers/create}">Add new customer</a>
 <form action="#" th:action="@{/customer/search}" method="get">
     <input type="text" name="s" >
     <input type="submit" value="Search">
     <table>
         <thead>
         <tr>
+            <th>No</th>
             <th>Phone</th>
             <th>Name</th>
             <th>Email</th>
@@ -21,14 +22,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="customers,iterStat : ${customers}">
+        <tr th:each="customer,iterStat : ${customers}">
             <td th:text="${iterStat.count}"></td>
-            <td th:text="${customers.phone}"></td>
-            <td th:text="${customers.name}"></td>
-            <td th:text="${customers.email}"></td>
-            <td th:text="${customers.address}"></td>
-            <td><a th:href="@{/customer/{phone}/edit(id=${customers.phone})}">Edit</a></td>
-            <td><a th:href="@{/customer/{phone}/delete(id=${customers.phone})}">Delete</a></td>
+            <td th:text="${customer.phone}"></td>
+            <td th:text="${customer.name}"></td>
+            <td th:text="${customer.email}"></td>
+            <td th:text="${customer.address}"></td>
+            <td><a th:href="@{/customers/edit/__${customer.phone}__}">Edit</a></td>
+            <td><a th:href="@{/customers/delete/__${customer.phone}__}">Delete</a></td>
         </tr>
         </tbody>
     </table>

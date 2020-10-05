@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit customer</title>
+</head>
+<body>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<a th:href="@{/customers}">List customer</a>
+<form action="#"  th:action="@{/customers/edit}" th:object="${customer}" method="post">
+    <label>Phone: </label><br>
+    <input type="text" th:field="*{phone}"/><br>
+    <label>Name: </label><br>
+    <input type="text" th:field="*{name}"/><br>
+    <label>Email: </label><br>
+    <input type="text" th:field="*{email}"/><br>
+    <label>Address: </label><br>
+    <input type="text" th:field="*{address}"/><br>
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>
