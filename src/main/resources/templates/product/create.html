@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>
+    <a href="/products">List Product</a>
+</p>
+<div>
+    <h2>Create New Product</h2>
+    <form th:action="@{/products/create}" th:object="${products}" method="post" >
+        <div>
+            <label>ID:</label>
+            <input type="text" th:field="*{id}"/>
+        </div>
+        <div>
+            <label>Type:</label>
+            <input type="text" th:field="*{type}"/>
+        </div>
+        <div>
+            <label>Name:</label>
+            <input type="text" th:field="*{name}"/>
+        </div>
+        <div>
+            <label >Brand:</label>
+            <select  th:field="*{brand}">
+                <option th:value="lg" th:text="lg"></option>
+                <option th:value="midea" th:text="midea"></option>
+                <option th:value="gree" th:text="gree"></option>
+                <option th:value="electrolux" th:text="electrolux"></option>
+                <option th:value="daikin" th:text="daikin"></option>
+                <option th:value="hitachi" th:text="hitachi"></option>
+                <option th:value="mdv" th:text="mdv"></option>
+                <option th:value="panasonic" th:text="panasonic"></option>
+                <option th:value="samsung" th:text="samsung"></option>
+                <option th:value="casper" th:text="casper"></option>
+                <option th:value="kangaroo" th:text="kangaroo"></option>
+                <option th:value="aqua" th:text="aqua"></option>
+                <option th:value="hitachi" th:text="hitachi"></option>
+                <option th:value="toshiba" th:text="toshiba"></option>
+                <option th:value="sony" th:text="sony"></option>
+                <option th:value="tcl" th:text="tcl"></option>
+                <option th:value="asanzo" th:text="asanzo"></option>
+            </select>
+        </div>
+        <div>
+            <label >Price:</label>
+            <input type="number"  th:field="*{price}"/>
+        </div>
+        <div>
+            <label >Image:</label>
+            <input type="text"  th:field="*{image}"/>
+        </div>
+        <div>
+            <label >Amount:</label>
+            <input type="number"  th:field="*{amount}"/>
+        </div>
+        <div>
+            <label ></label>
+            <input type="submit" value="submit"/>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -11,7 +11,7 @@
 </head>
 <body>
 <h2 style="float: left">List Products</h2>
-<a th:href="@{/add-product}" class="btn btn-success" role="button" style="float: right">Create new product</a>
+<a href="/products/create" class="btn btn-success" role="button" style="float: right">Create new product</a>
 <table class="table">
     <thead class="thead-dark">
     <tr>
@@ -36,8 +36,8 @@
             <td th:text="${#numbers.formatDecimal(product.price,3,'POINT',0,'COMMA')}"></td>
             <td><img th:src="${product.image}"></td>
             <td th:text="${product.amount}"></td>
-            <td><a th:href="@{/edit-product/__${product.id}__}" class="btn btn-success" role="button">Edit</a></td>
-            <td><a th:href="@{/delete-product/__${product.id}__}" class="btn btn-success" role="button" onclick="return confirm('Are you sure?')">Delete</a></td>
+            <td><a th:href="@{/products/edit/__${product.id}__}" class="btn btn-success" role="button">Edit</a></td>
+            <td><a th:href="@{/products/delete/__${product.id}__}" class="btn btn-success" role="button" onclick="return confirm('Are you sure?')">Delete</a></td>
         </tr>
     </th:block>
     </tbody>
