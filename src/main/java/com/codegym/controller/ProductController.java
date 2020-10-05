@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-
 @Controller
 @RequestMapping("/products")
 public class ProductController {
@@ -18,7 +17,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public ModelAndView listProducts(Pageable pageable){
         Page<Product> products = productService.findAll(pageable);
         ModelAndView modelAndView = new ModelAndView("/product/list");
