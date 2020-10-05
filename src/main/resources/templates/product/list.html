@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List Products</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<h2 style="float: left">List Products</h2>
+<a th:href="@{/add-product}" class="btn btn-success" role="button" style="float: right">Create new product</a>
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th>ID</th>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Brand</th>
+        <th>Price</th>
+        <th>Image</th>
+        <th>Amount</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:each="product : ${products}">
+        <tr>
+            <td th:text="${product.id}"></td>
+            <td th:text="${product.type}"></td>
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.brand}"></td>
+            <td th:text="${#numbers.formatDecimal(product.price,3,'POINT',0,'COMMA')}"></td>
+            <td><img th:src="${product.image}"></td>
+            <td th:text="${product.amount}"></td>
+            <td><a th:href="@{/edit-product/__${product.id}__}" class="btn btn-success" role="button">Edit</a></td>
+            <td><a th:href="@{/delete-product/__${product.id}__}" class="btn btn-success" role="button" onclick="return confirm('Are you sure?')">Delete</a></td>
+        </tr>
+    </th:block>
+    </tbody>
+</table>
+<div>
+    <a th:if="${products.hasPrevious()}"
+       th:href="@{'/products'(page=${products.number - 1}, size=${products.size})}">
+        Previous
+    </a>
+    [[${products.number + 1}]]/[[${products.totalPages}]]
+    <a th:if="${products.hasNext()}"
+       th:href="@{'/products'(page=${products.number + 1}, size=${products.size})}">
+        Next
+    </a>
+</div>
+</body>
+</html>
