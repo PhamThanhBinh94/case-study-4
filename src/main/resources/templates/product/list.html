@@ -42,5 +42,16 @@
     </th:block>
     </tbody>
 </table>
+<div>
+    <a th:if="${products.hasPrevious()}"
+       th:href="@{'/products'(page=${products.number - 1}, size=${products.size})}">
+        Previous
+    </a>
+    [[${products.number + 1}]]/[[${products.totalPages}]]
+    <a th:if="${products.hasNext()}"
+       th:href="@{'/products'(page=${products.number + 1}, size=${products.size})}">
+        Next
+    </a>
+</div>
 </body>
 </html>
