@@ -7,8 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class CustomerServiceImpl implements CustomerService{
     @Autowired
@@ -19,8 +17,8 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     @Override
-    public List<Customer> search(String q) {
-        return customerRepository.findByNameContaining(q);
+    public Page<Customer> findByNameContaining(String q, Pageable pageable) {
+        return customerRepository.findByNameContaining(q,pageable);
     }
 
     @Override
