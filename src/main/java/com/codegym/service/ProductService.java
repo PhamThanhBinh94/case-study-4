@@ -5,6 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 public interface ProductService {
     Page<Product> findAll(Pageable pageable);
@@ -14,4 +16,8 @@ public interface ProductService {
     Product findById(String id);
 
     void deleteById(String id);
+
+    List<Product> findFirst6ByType(String type);
+
+    Page<Product> findAllByType(String type, Pageable pageable);
 }

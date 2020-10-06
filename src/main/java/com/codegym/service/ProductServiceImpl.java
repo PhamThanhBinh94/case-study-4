@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductServiceImpl implements ProductService{
 
@@ -31,5 +33,15 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public void deleteById(String id) {
         productRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Product> findFirst6ByType(String type) {
+        return productRepository.findFirst6ByType(type);
+    }
+
+    @Override
+    public Page<Product> findAllByType(String type, Pageable pageable) {
+        return productRepository.findAllByType(type,pageable);
     }
 }
