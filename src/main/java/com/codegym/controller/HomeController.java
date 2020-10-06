@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -21,7 +20,7 @@ public class HomeController {
 
     @GetMapping("/")
     public ModelAndView index(){
-        ModelAndView modelAndView = new ModelAndView("/main/index");
+        ModelAndView modelAndView = new ModelAndView("main/index");
         List<Product> listTV = productService.findFirst6ByType("tivi");
         List<Product> listTL = productService.findFirst6ByType("tu-lanh");
         List<Product> listDH = productService.findFirst6ByType("dieu-hoa-nhiet-do");
@@ -46,15 +45,15 @@ public class HomeController {
         return "main/checkout";
     }
 
-    @GetMapping("/{type}/{id}")
-    public ModelAndView product(@PathVariable("type") String type, @PathVariable("id") String id){
+    @GetMapping("/chi-tiet/{id}")
+    public ModelAndView product(@PathVariable("id") String id){
         ModelAndView modelAndView;
         Product product = productService.findById(id);
-        if(product.type.equals(type)) {
-            modelAndView = new ModelAndView("/main/product");
+        if(product != null) {
+            modelAndView = new ModelAndView("main/product");
             modelAndView.addObject("product",product);
         } else {
-            modelAndView = new ModelAndView("/main/blank");
+            modelAndView = new ModelAndView("main/blank");
         }
         return modelAndView;
     }
