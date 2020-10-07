@@ -6,7 +6,7 @@
 </head>
 <body>
 <a th:href="@{/customers/create}">Add new customer</a>
-<form action="#" th:action="@{/customer/search}" method="get">
+<form th:action="@{/customers/search}" method="get">
     <input type="text" name="s" >
     <input type="submit" value="Search">
     <table>

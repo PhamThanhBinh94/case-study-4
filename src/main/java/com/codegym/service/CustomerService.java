@@ -11,7 +11,7 @@ import java.util.List;
 public interface CustomerService {
     Page<Customer> findAll(Pageable pageable);
 
-    List<Customer> search(String q);
+    Page<Customer> findByNameContaining(String q, Pageable pageable);
 
     Customer findById(String phone);
 
