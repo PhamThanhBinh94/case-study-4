@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -18,7 +19,10 @@ public class ReviewController {
     @RequestMapping(value = "/reviews/add", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<Integer> getListRating(@RequestBody Review review){
-
+        review.setDate(new Date());
+        System.out.println(review);
+        reviewService.addReview(review);
+        return reviewService.getListRatingOfProductById(review.getProductId());
     }
 
 }

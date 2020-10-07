@@ -389,7 +389,7 @@
                                                 <div class="rating-progress">
                                                     <div style="width: 80%;"></div>
                                                 </div>
-                                                <span class="sum">3</span>
+                                                <span id="5stars" class="sum">3</span>
                                             </li>
                                             <li>
                                                 <div class="rating-stars">
@@ -402,7 +402,7 @@
                                                 <div class="rating-progress">
                                                     <div style="width: 60%;"></div>
                                                 </div>
-                                                <span class="sum">2</span>
+                                                <span id="4stars" class="sum">2</span>
                                             </li>
                                             <li>
                                                 <div class="rating-stars">
@@ -415,7 +415,7 @@
                                                 <div class="rating-progress">
                                                     <div></div>
                                                 </div>
-                                                <span class="sum">0</span>
+                                                <span id="3stars" class="sum">0</span>
                                             </li>
                                             <li>
                                                 <div class="rating-stars">
@@ -428,7 +428,7 @@
                                                 <div class="rating-progress">
                                                     <div></div>
                                                 </div>
-                                                <span class="sum">0</span>
+                                                <span id="2stars" class="sum">0</span>
                                             </li>
                                             <li>
                                                 <div class="rating-stars">
@@ -441,7 +441,7 @@
                                                 <div class="rating-progress">
                                                     <div></div>
                                                 </div>
-                                                <span class="sum">0</span>
+                                                <span id="1star" class="sum">0</span>
                                             </li>
                                         </ul>
                                     </div>
@@ -515,22 +515,23 @@
                                 <!-- Review Form -->
                                 <div class="col-md-3">
                                     <div id="review-form">
-                                        <form class="review-form">
-                                            <input class="input" type="text" placeholder="Your Name">
-                                            <input class="input" type="text" placeholder="Your Phone">
-                                            <input class="input" type="email" placeholder="Your Email">
-                                            <textarea class="input" placeholder="Your Review"></textarea>
+                                        <form class="review-form" id="review_form">
+                                            <input id="product_id" type="hidden" th:value="${product.id}">
+                                            <input id="customer_name" class="input" type="text" placeholder="Your Name">
+                                            <input id="customer_phone" class="input" type="text" placeholder="Your Phone">
+                                            <input id="customer_email" class="input" type="email" placeholder="Your Email">
+                                            <textarea id="review_content" class="input" placeholder="Your Review"></textarea>
                                             <div class="input-rating">
                                                 <span>Your Rating: </span>
                                                 <div class="stars">
-                                                    <input id="star5" name="rating" value="5" type="radio"><label for="star5"></label>
-                                                    <input id="star4" name="rating" value="4" type="radio"><label for="star4"></label>
-                                                    <input id="star3" name="rating" value="3" type="radio"><label for="star3"></label>
-                                                    <input id="star2" name="rating" value="2" type="radio"><label for="star2"></label>
-                                                    <input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
+                                                    <input id="star5" name="rating" value="5" type="radio" class="radioBtn"><label for="star5"></label>
+                                                    <input id="star4" name="rating" value="4" type="radio" class="radioBtn"><label for="star4"></label>
+                                                    <input id="star3" name="rating" value="3" type="radio" class="radioBtn"><label for="star3"></label>
+                                                    <input id="star2" name="rating" value="2" type="radio" class="radioBtn"><label for="star2"></label>
+                                                    <input id="star1" name="rating" value="1" type="radio" class="radioBtn"><label for="star1"></label>
                                                 </div>
                                             </div>
-                                            <button class="primary-btn">Submit</button>
+                                            <button type="submit" class="primary-btn">Submit</button>
                                         </form>
                                     </div>
                                 </div>
@@ -827,6 +828,50 @@
 <script type="text/javascript" th:src="@{/js/nouislider.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/jquery.zoom.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/main.js}"></script>
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function (){
+        $('#review_form').submit(function (event){
+            let product = $('#product_id').val();
+            let name = $('#customer_name').val();
+            let phone = $('#customer_phone').val();
+            let email = $('#customer_email').val();
+            let content = $('#review_content').val();
+            let star = 0;
+            console.log(product);
+            console.log(name + " " + phone + " " + email);
+            console.log(content);
+            if($("input[type='radio'].radioBtn").is(':checked')) {
+                star = $("input[type='radio'].radioBtn:checked").val();
+            }
+            console.log(star);
+            let json = {
+                'productId' : product,
+                'customerName' : name,
+                'customerEmail' : email,
+                'customerPhone' : phone,
+                'content' : content,
+                'rate' : star
+            };
+            $.ajax({
+                headers: {
+                    'Accept' : 'application/json',
+                    'Content-type' : 'application/json'
+                },
+                type : "POST",
+                data : JSON.stringify(json),
+                url : "/reviews/add",
+                success : function (data){
+                    $('#1star').html(data[0]);
+                    $('#2stars').html(data[2]);
+                    $('#3stars').html(data[3]);
+                    $('#4stars').html(data[4]);
+                    $('#5stars').html(data[5]);
+                }
+            });
+            event.preventDefault();
+        });
+    });
+</script>
 </body>
 </html>
