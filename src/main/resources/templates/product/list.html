@@ -69,10 +69,6 @@
     </br>
 </div>
 
-
-
-
-
 <table class="table" border="1">
     <thead class="thead-dark">
     <tr>
@@ -83,6 +79,7 @@
         <th>Price</th>
         <th>Image</th>
         <th>Amount</th>
+        <th>View</th>
         <th>Edit</th>
         <th>Delete</th>
     </tr>
@@ -97,6 +94,7 @@
             <td th:text="${#numbers.formatDecimal(product.price,3,'POINT',0,'COMMA')}"></td>
             <td><img th:src="${product.image}"></td>
             <td th:text="${product.amount}"></td>
+            <td><a th:href="@{/products/view/__${product.id}__}" class="btn btn-success" role="button">View</a></td>
             <td><a th:href="@{/products/edit/__${product.id}__}" class="btn btn-success" role="button">Edit</a></td>
             <td><a th:href="@{/products/delete/__${product.id}__}" class="btn btn-success" role="button" onclick="return confirm('Are you sure?')">Delete</a></td>
         </tr>

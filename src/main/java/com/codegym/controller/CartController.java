@@ -111,7 +111,7 @@ public class CartController {
     public void order(HttpSession session,@RequestBody Customer customer) {
         customerService.save(customer);
         Bill bill = new Bill();
-        bill.setCustomer_id(customer.getPhone());
+        bill.setCustomerId(customer.getPhone());
         bill.setAddress(customer.getAddress());
         bill.setStatus("Waiting confirm!");
         billService.save(bill);

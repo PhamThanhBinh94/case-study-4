@@ -108,25 +108,31 @@
                             </a>
                             <div class="cart-dropdown">
                                 <div class="cart-list">
-
-                                    <th:block th:each="item : ${session.cart}">
-                                        <div class="product-widget">
-                                            <div class="product-img">
-                                                <img th:src="${item.product.image}"  alt="">
-                                            </div>
-                                            <div class="product-body">
-                                                <h3 class="product-name"><a href="#" th:text="${item.product.name}"></a></h3>
-                                                <h4 class="product-price">
-                                                    <input type="number" th:value="${item.quantity}" name="quantity" style="width: 50px;"/><a th:href="${'/checkout/remove/' + item.product.id}">X</a>
-                                                    <span th:text="${#numbers.formatDecimal(item.product.price * item.quantity,3,'POINT',0,'COMMA')}"></span>
-                                                </h4>
-                                            </div>
-                                            <button class="delete"><i class="fa fa-close"></i></button>
+                                    <div class="product-widget">
+                                        <div class="product-img">
+                                            <img src="../../static/img/product01.png" alt="">
                                         </div>
-                                    </th:block>
+                                        <div class="product-body">
+                                            <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                            <h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
+                                        </div>
+                                        <button class="delete"><i class="fa fa-close"></i></button>
+                                    </div>
+
+                                    <div class="product-widget">
+                                        <div class="product-img">
+                                            <img src="../../static/img/product02.png" alt="">
+                                        </div>
+                                        <div class="product-body">
+                                            <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                            <h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
+                                        </div>
+                                        <button class="delete"><i class="fa fa-close"></i></button>
+                                    </div>
                                 </div>
                                 <div class="cart-summary">
-                                    <h5>SUBTOTAL: <span th:text="${#numbers.formatDecimal(total,3,'POINT',0,'COMMA')}"></span></h5>
+                                    <small>3 Item(s) selected</small>
+                                    <h5>SUBTOTAL: $2940.00</h5>
                                 </div>
                                 <div class="cart-btns">
                                     <a href="#">View Cart</a>
@@ -214,16 +220,16 @@
                         <h3 class="title">Billing address</h3>
                     </div>
                     <div class="form-group">
-                        <input id="customerName" class="input" type="text" name="first-name" placeholder="Name">
+                        <input class="input" type="text" name="first-name" placeholder="First Name">
                     </div>
 <!--                    <div class="form-group">-->
 <!--                        <input class="input" type="text" name="last-name" placeholder="Last Name">-->
 <!--                    </div>-->
                     <div class="form-group">
-                        <input id="customerEmail" class="input" type="email" name="email" placeholder="Email">
+                        <input class="input" type="text" name="last-name" placeholder="Last Name">
                     </div>
                     <div class="form-group">
-                        <input id="customerAddress" class="input" type="text" name="address" placeholder="Address">
+                        <input class="input" type="email" name="email" placeholder="Email">
                     </div>
 <!--                    <div class="form-group">-->
 <!--                        <input class="input" type="text" name="city" placeholder="City">-->
