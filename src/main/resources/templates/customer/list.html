@@ -3,13 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <title>Danh sách khách hàng</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        header{
+            border-bottom: solid 1px #c0c0c0;
+        }
+    </style>
 </head>
 <body>
-<a th:href="@{/customers/create}">Add new customer</a>
-<form th:action="@{/customers/search}" method="get">
-    <input type="text" name="s" >
-    <input type="submit" value="Search">
-    <table>
+<div class="container-fluid">
+    <header class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">ADMIN</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="navbar-brand" href="http://localhost:8080/products">Sản phẩm<span class="sr-only">(current)</span></a>
+                        <a class="navbar-brand" href="http://localhost:8080/customers">Khách hàng <span class="sr-only">(current)</span></a>
+                        <a class="navbar-brand" href="http://localhost:8080/bill">Hóa đơn<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item dropdown ">
+                        <a class="nav-link dropdown-toggle navbar-brand" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Sản phẩm
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/products">Toàn bộ sản phẩm</a>
+                            <a class="dropdown-item" href="/products?type=tivi">Tivi</a>
+                            <a class="dropdown-item" href="/products?type=tu-lanh">Tủ lạnh</a>
+                            <a class="dropdown-item" href="/products?type=dieu-hoa-nhiet-do">Điều hòa</a>
+                            <a class="dropdown-item" href="/products?type=may-giat">Máy giặt</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Khác</a>
+                        </div>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0" th:action="@{/customers/search}" method="get">
+<!--                    <input class="form-control mr-sm-2" name="s" type="text" placeholder="">-->
+<!--                    <button  class="btn btn-outline-success my-2 my-sm-0" type="submit" th:placeholder="BillID">Tìm kiếm</button>-->
+                    <input class="form-control mr-sm-2" type="text" name="s" >
+                    <button  class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
+<!--                    <input type="submit" value="Search">-->
+                </form>
+            </div>
+                        <a th:href="@{/customers/create}" class="btn btn-success" role="button" style="float: right">Create new customer</a>
+        </nav>
+    </header>
+</div>
+<!--<a th:href="@{/customers/create}">Add new customer</a>-->
+<!--<form th:action="@{/customers/search}" method="get">-->
+<div>
+    <br/>
+    <center>
+        <h1>Danh sách khách hàng</h1>
+    </center>
+    <br/>
+</div>
+<form>
+<!--    <input type="text" name="s" >-->
+<!--    <input type="submit" value="Search">-->
+
+    <table border="1" cellpadding="5" class="table col-md-6" align="center">
         <thead>
         <tr>
             <th>No</th>

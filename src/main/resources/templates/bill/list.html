@@ -73,6 +73,7 @@
         <th>Status</th>
 <!--        <th>Total</th>-->
         <th>View</th>
+        <th>Edit</th>
     </tr>
         <th:block th:each="bill: ${bills}">
             <tr>
@@ -83,6 +84,7 @@
                 <td th:text="${bill.getStatus()}"> </td>
 <!--                <td th:text="${totals.get(bills.indexOf(bill))}"></td>-->
                 <td><a th:href="@{/bill/view/__${bill.billId}__}">View</a></td>
+                <td><a th:href="@{/bill/edit/__${bill.billId}__}">Edit</a></td>
             </tr>
         </th:block>
 </table>
