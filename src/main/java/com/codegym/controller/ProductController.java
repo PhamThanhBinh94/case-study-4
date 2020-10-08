@@ -1,6 +1,8 @@
 package com.codegym.controller;
 
 import com.codegym.model.Product;
+import com.codegym.model.ProductDetails;
+import com.codegym.service.ProductDetailsService;
 import com.codegym.service.ProductService;
 import net.bytebuddy.implementation.bind.annotation.Default;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private ProductDetailsService detailsService;
 
     @GetMapping("")
     public ModelAndView listProducts(@RequestParam("s") Optional<String> s, Pageable pageable) {
@@ -52,7 +57,7 @@ public class ProductController {
     }
 
     @GetMapping("/edit/{id}")
-    public ModelAndView showEditUser(@PathVariable String id){
+    public ModelAndView showEditProduct(@PathVariable String id){
         Product product = productService.findById(id);
         ModelAndView modelAndView = new ModelAndView("product/edit");
         modelAndView.addObject("products",product);
@@ -60,7 +65,7 @@ public class ProductController {
     }
 
     @PostMapping("/edit")
-    public ModelAndView updateUser(@ModelAttribute("product") Product product) throws IOException {
+    public ModelAndView updateProduct(@ModelAttribute("product") Product product) throws IOException {
         productService.save(product);
         ModelAndView modelAndView = new ModelAndView("product/edit");
         modelAndView.addObject("products", new Product());
@@ -68,11 +73,19 @@ public class ProductController {
     }
 
     @GetMapping("/delete/{id}")
-    public ModelAndView deleteUser(@PathVariable String id){
+    public ModelAndView deleteProduct(@PathVariable String id){
         productService.deleteById(id);
         ModelAndView modelAndView = new ModelAndView("redirect:/products");
         return modelAndView;
     }
 
-
+    @GetMapping("/view/{id}")
+    public ModelAndView viewProduct(@PathVariable String id){
+        ModelAndView modelAndView = new ModelAndView("product/view");
+        Product product = productService.findById(id);
+        ProductDetails details = detailsService.findDetailById(id);
+        modelAndView.addObject("product",product);
+        modelAndView.addObject("details",details);
+        return modelAndView;
+    }
 }

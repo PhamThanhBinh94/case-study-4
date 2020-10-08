@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${product.id}"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<table>
+    <tr>
+        <td>ID:</td>
+        <td th:text="${product.id}"></td>
+    </tr>
+    <tr>
+        <td>Type:</td>
+        <td th:text="${product.type}"></td>
+    </tr>
+    <tr>
+        <td>Name:</td>
+        <td th:text="${product.name}"></td>
+    </tr>
+    <tr>
+        <td>Brand:</td>
+        <td th:text="${product.brand}"></td>
+    </tr>
+    <tr>
+        <td>Price:</td>
+        <td th:text="${product.price}"></td>
+    </tr>
+    <tr>
+        <td>Image:</td>
+        <td><img th:src="${product.image}"></td>
+    </tr>
+    <tr>
+        <td>Amount:</td>
+        <td th:text="${product.amount}"></td>
+    </tr>
+    <tr>
+        <td>Feature:</td>
+        <td th:text="${details.feature}"></td>
+    </tr>
+    <tr>
+        <td>Technology:</td>
+        <td th:text="${details.technology}"></td>
+    </tr>
+    <tr>
+        <td>General Info:</td>
+        <td th:text="${details.generalInfo}"></td>
+    </tr>
+</table>
+</body>
+</html>

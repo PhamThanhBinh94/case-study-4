@@ -2,10 +2,7 @@ package com.codegym.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
@@ -15,6 +12,7 @@ import java.util.List;
 public class Product {
     @Id
     @NotEmpty
+    @Column(columnDefinition = "varchar(15)")
     public String id;
     public String type;
     public String name;
