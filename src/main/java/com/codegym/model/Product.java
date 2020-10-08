@@ -4,8 +4,10 @@ import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @Entity
 @Table(name = "product")
@@ -20,4 +22,5 @@ public class Product {
     public int price;
     public String image;
     public int amount;
+
 }
