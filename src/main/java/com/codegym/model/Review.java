@@ -1,6 +1,9 @@
 package com.codegym.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -9,22 +12,41 @@ import java.util.Date;
 @Entity
 @Table(name = "reviews")
 @Data
+@NoArgsConstructor
+@ToString
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    private String product_id;
+    private String productId;
 
     @NotNull
-    private String customer_name;
-    private String customer_email;
+    private String customerName;
+    private String customerEmail;
 
     @NotNull
-    private String customer_phone;
+    private String customerPhone;
+
+    @NotNull
+    private String content;
+
+    @NotNull
+    @Temporal(TemporalType.TIMESTAMP)
+    @UpdateTimestamp
     private Date date;
 
     @NotNull
     private int rate;
+
+    public Review(@NotNull String productId, @NotNull String customerName, String customerEmail, @NotNull String customerPhone, @NotNull String content, @NotNull Date date, @NotNull int rate) {
+        this.productId = productId;
+        this.customerName = customerName;
+        this.customerEmail = customerEmail;
+        this.customerPhone = customerPhone;
+        this.content = content;
+        this.date = date;
+        this.rate = rate;
+    }
 }
