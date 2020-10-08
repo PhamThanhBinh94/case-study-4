@@ -20,17 +20,22 @@ public class ReviewController {
 
     @RequestMapping(value = "/reviews/add", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<Integer> getListRating(@RequestBody Review review){
+    public void getListRating(@RequestBody Review review){
         review.setDate(new Date());
         System.out.println(review);
-//        reviewService.addReview(review);
-        return reviewService.getListRatingOfProductById(review.getProductId());
+        reviewService.addReview(review);
     }
 
-    @RequestMapping(value = "/reviews/get", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/reviews/get-review", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Page<Review> getReviews(@RequestBody Product product, Pageable pageable){
         return reviewService.findAllByProductId(product.getId(), pageable);
+    }
+
+    @RequestMapping(value = "/reviews/get-rate", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<Integer> getRates(@RequestBody Product product){
+        return reviewService.getListRatingOfProductById(product.getId());
     }
 
 }

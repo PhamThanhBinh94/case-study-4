@@ -2,14 +2,18 @@ package com.codegym.controller;
 
 import com.codegym.model.Product;
 import com.codegym.service.ProductService;
+import net.bytebuddy.implementation.bind.annotation.Default;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/products")
@@ -19,10 +23,16 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("")
-    public ModelAndView listProducts(Pageable pageable){
-        Page<Product> products = productService.findAll(pageable);
+    public ModelAndView listProducts(@RequestParam("s") Optional<String> s, Pageable pageable) {
+        Page<Product> products;
+        if (s.isPresent()){
+            products = productService.findAllByTypeOrIdOrOrBrand(s.get(),s.get(),s.get(),pageable);
+        }else {
+            products = productService.findAll(pageable);
+        }
         ModelAndView modelAndView = new ModelAndView("/product/list");
         modelAndView.addObject("products", products);
+        modelAndView.addObject("keyword",s.orElse(null));
         return modelAndView;
     }
 
@@ -40,7 +50,7 @@ public class ProductController {
         modelAndView.addObject("products", new Product());
         return modelAndView;
     }
-    
+
     @GetMapping("/edit/{id}")
     public ModelAndView showEditUser(@PathVariable String id){
         Product product = productService.findById(id);

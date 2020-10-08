@@ -44,4 +44,14 @@ public class ProductServiceImpl implements ProductService{
     public Page<Product> findAllByType(String type, Pageable pageable) {
         return productRepository.findAllByType(type,pageable);
     }
+
+    @Override
+    public Page<Product> findAllByTypeOrIdOrOrBrand(String type, String id, String brand, Pageable pageable) {
+        return productRepository.findAllByTypeOrIdOrBrand(type, id, brand, pageable);
+    }
+//
+//    @Override
+//    public List<Product> findAllByTypeOrIdOrOrBrand(String type, String id, String brand) {
+//        return productRepository.findAllByTypeOrIdOrBrand(type, id, brand);
+//    }
 }
