@@ -50,7 +50,7 @@ public class ProductController {
     }
 
     @GetMapping("/edit/{id}")
-    public ModelAndView showEditUser(@PathVariable String id){
+    public ModelAndView showEditProduct(@PathVariable String id){
         Product product = productService.findById(id);
         ModelAndView modelAndView = new ModelAndView("product/edit");
         modelAndView.addObject("products",product);
@@ -58,7 +58,7 @@ public class ProductController {
     }
 
     @PostMapping("/edit")
-    public ModelAndView updateUser(@ModelAttribute("product") Product product) throws IOException {
+    public ModelAndView updateProduct(@ModelAttribute("product") Product product) throws IOException {
         productService.save(product);
         ModelAndView modelAndView = new ModelAndView("product/edit");
         modelAndView.addObject("products", new Product());
@@ -66,7 +66,7 @@ public class ProductController {
     }
 
     @GetMapping("/delete/{id}")
-    public ModelAndView deleteUser(@PathVariable String id){
+    public ModelAndView deleteProduct(@PathVariable String id){
         productService.deleteById(id);
         ModelAndView modelAndView = new ModelAndView("redirect:/products");
         return modelAndView;
