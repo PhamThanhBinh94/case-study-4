@@ -1,9 +1,6 @@
 package com.codegym.controller;
 
-import com.codegym.model.Bill;
-import com.codegym.model.BillDetail;
-import com.codegym.model.Customer;
-import com.codegym.model.Item;
+import com.codegym.model.*;
 import com.codegym.service.BillDetailService;
 import com.codegym.service.BillService;
 import com.codegym.service.CustomerService;
@@ -117,6 +114,9 @@ public class CartController {
         billService.save(bill);
         List<Item> cart = (List<Item>) session.getAttribute("cart");
         for (Item item : cart) {
+            Product product = productService.findById(item.getProduct().getId());
+            product.setAmount(product.getAmount() - item.getQuantity());
+            productService.save(product);
             BillDetail billDetail = new BillDetail();
             billDetail.setBillId(bill.getBillId());
             billDetail.setUnit_price(item.getProduct().getPrice());
