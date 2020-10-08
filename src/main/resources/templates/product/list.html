@@ -12,6 +12,12 @@
 <body>
 <h2 style="float: left">List Products</h2>
 <a href="/products/create" class="btn btn-success" role="button" style="float: right">Create new product</a>
+<br/>
+<form>
+    <label><h4>Search by: </h4></label>
+    <input name="s" type="text" th:value="${keyword}" placeholder="Id, Brand, Type">
+    <input type="submit" value="Search"/>
+</form>
 <table class="table">
     <thead class="thead-dark">
     <tr>
@@ -42,14 +48,14 @@
     </th:block>
     </tbody>
 </table>
-<div>
+<div >
     <a th:if="${products.hasPrevious()}"
-       th:href="@{'/products'(page=${products.number - 1}, size=${products.size})}">
+       th:href="@{'/products'(page=${products.number - 1}, size=${products.size},s=${keyword})}">
         Previous
     </a>
     [[${products.number + 1}]]/[[${products.totalPages}]]
     <a th:if="${products.hasNext()}"
-       th:href="@{'/products'(page=${products.number + 1}, size=${products.size})}">
+       th:href="@{'/products'(page=${products.number + 1}, size=${products.size},s=${keyword})}">
         Next
     </a>
 </div>

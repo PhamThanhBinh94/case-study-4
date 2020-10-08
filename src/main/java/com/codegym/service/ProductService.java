@@ -19,5 +19,11 @@ public interface ProductService {
 
     List<Product> findFirst6ByType(String type);
 
+
     Page<Product> findAllByType(String type, Pageable pageable);
+
+    Page<Product> findAllByTypeOrIdOrOrBrand(String type,String id,String brand,Pageable pageable);
+
+//    List<Product> findAllByTypeOrIdOrOrBrand(String type,String id,String brand);
+
 }
