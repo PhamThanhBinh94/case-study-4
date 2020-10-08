@@ -1,13 +1,17 @@
 package com.codegym.controller;
 
+import com.codegym.model.Bill;
+import com.codegym.model.BillDetail;
+import com.codegym.model.Customer;
 import com.codegym.model.Item;
+import com.codegym.service.BillDetailService;
+import com.codegym.service.BillService;
+import com.codegym.service.CustomerService;
 import com.codegym.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,10 +23,23 @@ import java.util.List;
 @RequestMapping("/checkout")
 public class CartController {
     @Autowired
+    private CustomerService customerService;
+
+    @Autowired
+    private BillDetailService billDetailService;
+
+    @Autowired
+    private BillService billService;
+
+    @Autowired
     private ProductService productService;
 
     @GetMapping("")
     public ModelAndView index(HttpSession session){
+        if (session.getAttribute("cart") == null){
+            List<Item> cart = new ArrayList<Item>();
+            session.setAttribute("cart", cart);
+        }
         ModelAndView modelAndView = new ModelAndView("main/checkout");
         modelAndView.addObject("total", sum(session));
         return modelAndView;
@@ -59,7 +76,7 @@ public class CartController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update( HttpServletRequest request, HttpSession session) {
+    public String update(HttpServletRequest request, HttpSession session) {
         String[] quantities = request.getParameterValues("quantity");
         List<Item> cart = (List<Item>) session.getAttribute("cart");
         for (int i = 0 ; i < cart.size();i++){
@@ -87,5 +104,25 @@ public class CartController {
                     * item.getProduct().getPrice();
         }
         return s;
+    }
+
+    @RequestMapping(value = "/order", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public void order(HttpSession session,@RequestBody Customer customer) {
+        customerService.save(customer);
+        Bill bill = new Bill();
+        bill.setCustomer_id(customer.getPhone());
+        bill.setAddress(customer.getAddress());
+        bill.setStatus("Waiting confirm!");
+        billService.save(bill);
+        List<Item> cart = (List<Item>) session.getAttribute("cart");
+        for (Item item : cart) {
+            BillDetail billDetail = new BillDetail();
+            billDetail.setBillId(bill.getBillId());
+            billDetail.setUnit_price(item.getProduct().getPrice());
+            billDetail.setProductId(item.getProduct().getId());
+            billDetail.setAmount(item.getQuantity());
+            billDetailService.save(billDetail);
+        }
     }
 }

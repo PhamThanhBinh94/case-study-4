@@ -108,31 +108,25 @@
                             </a>
                             <div class="cart-dropdown">
                                 <div class="cart-list">
-                                    <div class="product-widget">
-                                        <div class="product-img">
-                                            <img src="../../static/img/product01.png" alt="">
-                                        </div>
-                                        <div class="product-body">
-                                            <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                            <h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-                                        </div>
-                                        <button class="delete"><i class="fa fa-close"></i></button>
-                                    </div>
 
-                                    <div class="product-widget">
-                                        <div class="product-img">
-                                            <img src="../../static/img/product02.png" alt="">
+                                    <th:block th:each="item : ${session.cart}">
+                                        <div class="product-widget">
+                                            <div class="product-img">
+                                                <img th:src="${item.product.image}"  alt="">
+                                            </div>
+                                            <div class="product-body">
+                                                <h3 class="product-name"><a href="#" th:text="${item.product.name}"></a></h3>
+                                                <h4 class="product-price">
+                                                    <input type="number" th:value="${item.quantity}" name="quantity" style="width: 50px;"/><a th:href="${'/checkout/remove/' + item.product.id}">X</a>
+                                                    <span th:text="${#numbers.formatDecimal(item.product.price * item.quantity,3,'POINT',0,'COMMA')}"></span>
+                                                </h4>
+                                            </div>
+                                            <button class="delete"><i class="fa fa-close"></i></button>
                                         </div>
-                                        <div class="product-body">
-                                            <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                            <h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-                                        </div>
-                                        <button class="delete"><i class="fa fa-close"></i></button>
-                                    </div>
+                                    </th:block>
                                 </div>
                                 <div class="cart-summary">
-                                    <small>3 Item(s) selected</small>
-                                    <h5>SUBTOTAL: $2940.00</h5>
+                                    <h5>SUBTOTAL: <span th:text="${#numbers.formatDecimal(total,3,'POINT',0,'COMMA')}"></span></h5>
                                 </div>
                                 <div class="cart-btns">
                                     <a href="#">View Cart</a>
@@ -220,28 +214,28 @@
                         <h3 class="title">Billing address</h3>
                     </div>
                     <div class="form-group">
-                        <input class="input" type="text" name="first-name" placeholder="First Name">
+                        <input id="customerName" class="input" type="text" name="first-name" placeholder="Name">
+                    </div>
+<!--                    <div class="form-group">-->
+<!--                        <input class="input" type="text" name="last-name" placeholder="Last Name">-->
+<!--                    </div>-->
+                    <div class="form-group">
+                        <input id="customerEmail" class="input" type="email" name="email" placeholder="Email">
                     </div>
                     <div class="form-group">
-                        <input class="input" type="text" name="last-name" placeholder="Last Name">
+                        <input id="customerAddress" class="input" type="text" name="address" placeholder="Address">
                     </div>
-                    <div class="form-group">
-                        <input class="input" type="email" name="email" placeholder="Email">
-                    </div>
-                    <div class="form-group">
-                        <input class="input" type="text" name="address" placeholder="Address">
-                    </div>
-                    <div class="form-group">
-                        <input class="input" type="text" name="city" placeholder="City">
-                    </div>
-                    <div class="form-group">
-                        <input class="input" type="text" name="country" placeholder="Country">
-                    </div>
+<!--                    <div class="form-group">-->
+<!--                        <input class="input" type="text" name="city" placeholder="City">-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <input class="input" type="text" name="country" placeholder="Country">-->
+<!--                    </div>-->
                     <div class="form-group">
                         <input class="input" type="text" name="zip-code" placeholder="ZIP Code">
                     </div>
                     <div class="form-group">
-                        <input class="input" type="tel" name="tel" placeholder="Telephone">
+                        <input id="customerPhone" class="input" type="tel" name="tel" placeholder="Telephone">
                     </div>
                     <div class="form-group">
                         <div class="input-checkbox">
@@ -259,46 +253,46 @@
                 </div>
                 <!-- /Billing Details -->
 
-                <!-- Shiping Details -->
-                <div class="shiping-details">
-                    <div class="section-title">
-                        <h3 class="title">Shiping address</h3>
-                    </div>
-                    <div class="input-checkbox">
-                        <input type="checkbox" id="shiping-address">
-                        <label for="shiping-address">
-                            <span></span>
-                            Ship to a diffrent address?
-                        </label>
-                        <div class="caption">
-                            <div class="form-group">
-                                <input class="input" type="text" name="first-name" placeholder="First Name">
-                            </div>
-                            <div class="form-group">
-                                <input class="input" type="text" name="last-name" placeholder="Last Name">
-                            </div>
-                            <div class="form-group">
-                                <input class="input" type="email" name="email" placeholder="Email">
-                            </div>
-                            <div class="form-group">
-                                <input class="input" type="text" name="address" placeholder="Address">
-                            </div>
-                            <div class="form-group">
-                                <input class="input" type="text" name="city" placeholder="City">
-                            </div>
-                            <div class="form-group">
-                                <input class="input" type="text" name="country" placeholder="Country">
-                            </div>
-                            <div class="form-group">
-                                <input class="input" type="text" name="zip-code" placeholder="ZIP Code">
-                            </div>
-                            <div class="form-group">
-                                <input class="input" type="tel" name="tel" placeholder="Telephone">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- /Shiping Details -->
+<!--                &lt;!&ndash; Shiping Details &ndash;&gt;-->
+<!--                <div class="shiping-details">-->
+<!--                    <div class="section-title">-->
+<!--                        <h3 class="title">Shiping address</h3>-->
+<!--                    </div>-->
+<!--                    <div class="input-checkbox">-->
+<!--                        <input type="checkbox" id="shiping-address">-->
+<!--                        <label for="shiping-address">-->
+<!--                            <span></span>-->
+<!--                            Ship to a diffrent address?-->
+<!--                        </label>-->
+<!--                        <div class="caption">-->
+<!--                            <div class="form-group">-->
+<!--                                <input class="input" type="text" name="first-name" placeholder="First Name">-->
+<!--                            </div>-->
+<!--                            <div class="form-group">-->
+<!--                                <input class="input" type="text" name="last-name" placeholder="Last Name">-->
+<!--                            </div>-->
+<!--                            <div class="form-group">-->
+<!--                                <input class="input" type="email" name="email" placeholder="Email">-->
+<!--                            </div>-->
+<!--                            <div class="form-group">-->
+<!--                                <input class="input" type="text" name="address" placeholder="Address">-->
+<!--                            </div>-->
+<!--                            <div class="form-group">-->
+<!--                                <input class="input" type="text" name="city" placeholder="City">-->
+<!--                            </div>-->
+<!--                            <div class="form-group">-->
+<!--                                <input class="input" type="text" name="country" placeholder="Country">-->
+<!--                            </div>-->
+<!--                            <div class="form-group">-->
+<!--                                <input class="input" type="text" name="zip-code" placeholder="ZIP Code">-->
+<!--                            </div>-->
+<!--                            <div class="form-group">-->
+<!--                                <input class="input" type="tel" name="tel" placeholder="Telephone">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                &lt;!&ndash; /Shiping Details &ndash;&gt;-->
 
                 <!-- Order notes -->
                 <div class="order-notes">
@@ -381,7 +375,7 @@
                         I've read and accept the <a href="#">terms & conditions</a>
                     </label>
                 </div>
-                <a href="#" class="primary-btn order-submit">Place order</a>
+                <button onclick="placeOrder();" class="primary-btn order-submit">Place order</button>
             </div>
             <!-- /Order Details -->
         </div>
@@ -530,6 +524,32 @@
 <script type="text/javascript" th:src="@{/js/nouislider.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/jquery.zoom.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/main.js}"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    function placeOrder(){
+        let name = $('#customerName').val();
+        let email = $('#customerEmail').val();
+        let phone = $('#customerPhone').val();
+        let address = $('#customerAddress').val();
+        let json = {
+            'name': name,
+            'email': email,
+            'phone': phone,
+            'address': address
+        }
+        $.ajax({
+            headers:{
+                'Content-type': 'application/json'
+            },
+            type: "POST",
+            url: "/checkout/order",
+            data: JSON.stringify(json),
+            success:function (){
+                console.log('OK');
+            }
+        })
+    }
+</script>
 
 </body>
 </html>
