@@ -27,12 +27,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                    <a class="navbar-brand" href="http://localhost:8080/users">Khách hàng <span class="sr-only">(current)</span></a>
-                    <a class="navbar-brand" href="http://localhost:8080/bill">Hóa đơn<span class="sr-only">(current)</span></a>
-                </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
+                        <a class="navbar-brand" href="http://localhost:8080/products">Sản phẩm<span class="sr-only">(current)</span></a>
+                        <a class="navbar-brand" href="http://localhost:8080/customers">Khách hàng <span class="sr-only">(current)</span></a>
+                        <a class="navbar-brand" href="http://localhost:8080/bill">Hóa đơn<span class="sr-only">(current)</span></a>
+                    </li>
                     <li class="nav-item dropdown ">
                         <a class="nav-link dropdown-toggle navbar-brand" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Sản phẩm
@@ -47,29 +45,27 @@
                             <a class="dropdown-item" href="#">Khác</a>
                         </div>
                     </li>
-                                   <li class="nav-item">
-                                       <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a></li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Tìm kiếm" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm sản phẩm</button>
-                </form>
             </div>
+            <a href="/bill/" class="btn btn-success" role="button" style="float: right">Quay Lại</a>
         </nav>
-
     </header>
 </div>
 <div align="center">
-    <h3>Chi tiết hóa đơn </h3>
+    <div>
+        <br/>
+        <h3>Hóa đơn chi tiết </h3>
+        <br/>
+    </div>
     <table align="center" border="1" cellpadding="5" class="table table-hover col-md-3" >
         <th:block th:each="bill : ${bill}">
             <tr>
                 <th class="thead-dark">Bill Id:</th>
                 <td th:text="${bill.getBillId()}"></td>
-            </tr>
+            </tr>`
             <tr>
                 <th class="thead-dark">Customer Id:</th>
-                <td th:text="${bill.getCustomer_id()}"></td>
+                <td th:text="${bill.getCustomerId()}"></td>
             </tr>
             <tr>
                 <th class="thead-dark">Date:</th>

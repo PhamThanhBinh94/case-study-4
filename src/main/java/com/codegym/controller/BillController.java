@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/bill")
@@ -23,10 +24,16 @@ public class BillController {
     private BillDetailService billDetailService;
 
     @GetMapping("")
-    public ModelAndView listBills(Pageable pageable){
-        Page<Bill> bills = billService.findAll(pageable);
+    public ModelAndView listBills( @RequestParam("s") Optional<Long> s, Pageable pageable){
+        Page<Bill> bills;
+        if(s.isPresent()){
+            bills = billService.findAllByBillId(s.get(),pageable);
+        }else {
+            bills = billService.findAll(pageable);
+        }
         ModelAndView modelAndView = new ModelAndView("/bill/list");
         modelAndView.addObject("bills", bills);
+        modelAndView.addObject("keyword",s.orElse(null));
         return modelAndView;
     }
 
