@@ -4,17 +4,15 @@ import com.codegym.model.Product;
 import com.codegym.model.ProductDetails;
 import com.codegym.service.ProductDetailsService;
 import com.codegym.service.ProductService;
-import net.bytebuddy.implementation.bind.annotation.Default;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
-import java.util.List;
+
 import java.util.Optional;
 
 @Controller
