@@ -16,3 +16,4 @@ public interface ReviewRepository extends PagingAndSortingRepository<Review, Lon
 
     Integer countReviewsByProductIdAndRateEquals(String id, int star);
 }
+

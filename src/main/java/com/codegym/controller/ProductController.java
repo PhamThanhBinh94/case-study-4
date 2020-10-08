@@ -73,6 +73,4 @@ public class ProductController {
         ModelAndView modelAndView = new ModelAndView("redirect:/products");
         return modelAndView;
     }
-
-
 }

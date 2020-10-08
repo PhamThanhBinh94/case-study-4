@@ -1,3 +1,4 @@
+
 package com.codegym.service;
 
 import com.codegym.model.Review;
@@ -13,3 +14,4 @@ public interface ReviewService {
 
     List<Integer> getListRatingOfProductById(String id);
 }
+
