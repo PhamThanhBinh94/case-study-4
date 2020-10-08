@@ -16,7 +16,8 @@ public class Bill {
     @Column(name="bill_id")
     private Long billId;
 
-    private String customer_id;
+    @Column(name="customer_id")
+    private String customerId;
 
     @Temporal(TemporalType.TIMESTAMP)
     @UpdateTimestamp

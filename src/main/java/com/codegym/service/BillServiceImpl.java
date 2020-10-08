@@ -37,4 +37,14 @@ public class BillServiceImpl implements BillService {
     public Bill findByBillId(Long id) {
         return billRepository.findBillByBillId(id);
     }
+
+    @Override
+    public Page<Bill> findAllByBillIdOrCustomerIdOrStatus(Long billId, String customerId, String status, Pageable pageable) {
+        return billRepository.findAllByBillIdOrCustomerIdOrStatus(billId, customerId, status, pageable);
+    }
+
+    @Override
+    public Page<Bill> findAllByBillId(Long id, Pageable pageable) {
+        return billRepository.findAllByBillId(id, pageable);
+    }
 }
