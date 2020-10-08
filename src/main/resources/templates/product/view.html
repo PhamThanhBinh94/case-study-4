@@ -10,36 +10,34 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-<table>
+<table class="table" border="1">
     <tr>
-        <td>ID:</td>
+        <th>ID:</th>
         <td th:text="${product.id}"></td>
+        <td rowspan="6"><img  th:src="${product.image}"></td>
     </tr>
     <tr>
-        <td>Type:</td>
+        <th>Type:</th>
         <td th:text="${product.type}"></td>
     </tr>
     <tr>
-        <td>Name:</td>
+        <th>Name:</th>
         <td th:text="${product.name}"></td>
     </tr>
     <tr>
-        <td>Brand:</td>
+        <th>Brand:</th>
         <td th:text="${product.brand}"></td>
     </tr>
     <tr>
-        <td>Price:</td>
+        <th>Price:</th>
         <td th:text="${product.price}"></td>
     </tr>
     <tr>
-        <td>Image:</td>
-        <td><img th:src="${product.image}"></td>
-    </tr>
-    <tr>
-        <td>Amount:</td>
+        <th>Amount:</th>
         <td th:text="${product.amount}"></td>
     </tr>
 </table>
+
 <br/>
 <input type="hidden" id="feature" th:value="${details.feature}">
 <input type="hidden" id="technology" th:value="${details.technology}">
@@ -55,25 +53,32 @@
     $(document).ready(function (){
         let feature = $('#feature').val();
         let technology = $('#technology').val();
+        console.log(technology);
         let general = $('#general').val();
         console.log(feature.replaceAll('__ <info>','</td></tr><tr><td>').replace('<info>','<tr><td>').replaceAll('__ ','</td><td>').replace('__','</td></tr>'));
         feature = feature.replaceAll('__ <info>','</td></tr><tr><td>').replace('<info>','<tr><td>').replaceAll('__ ','</td><td>').replace('__','</td></tr>');
-        technology = technology.replaceAll('__ <info>','</td></tr><tr><td>').replace('<info>','<tr><td>').replaceAll('__ ','</td><td>').replace('__','</td></tr>');
-        general = general.replaceAll('__ <info>','</td></tr><tr><td>').replace('<info>','<tr><td>').replaceAll('__ ','</td><td>').replace('__','</td></tr>')
+        general = general.replaceAll('__ <info>','</td></tr><tr><td>').replace('<info>','<tr><td>').replaceAll('__ ','</td><td>').replace('__','</td></tr>').replace('<td> <info>','<tr><td>');
         let render_table = '<table class="table" border="1">\n' +
             '    <tr style="background-color: #1e1f29; color: ghostwhite;">\n' +
             '        <th colspan="2">Feature:</th>\n' +
             '    </tr>\n' + feature +
-            '\n' +
-            '    <tr style="background-color: #1e1f29; color: ghostwhite;">\n' +
-            '        <th colspan="2">Technology:</th>\n' +
-            '    </tr>\n' + technology +
-            '\n' +
-            '    <tr style="background-color: #1e1f29; color: ghostwhite;">\n' +
+            '\n';
+        if (technology != ''){
+            technology = technology.replaceAll('__ <info>','</td></tr><tr><td>').replace('<info>','<tr><td>').replaceAll('__ ','</td><td>').replace('__','</td></tr>').replace('<td> <info>','<tr><td>');
+            render_table += '    <tr style="background-color: #1e1f29; color: ghostwhite;">\n' +
+                '        <th colspan="2">Technology:</th>\n' +
+                '    </tr>\n' + technology +
+                '\n';
+        }
+        console.log(feature);
+        console.log(technology);
+        console.log(general);
+        render_table += '    <tr style="background-color: #1e1f29; color: ghostwhite;">\n' +
             '        <th colspan="2">General Info:</th>\n' +
             '    </tr>\n' + general +
             '\n' +
             '</table>';
+
         $('#details_table').html(render_table);
     });
 </script>

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ReviewRepository extends PagingAndSortingRepository<Review, Long> {
-    Page<Review> findAllByProductId(String id, Pageable pageable);
+    Page<Review> findAllByProductIdOrderByDateDesc(String id, Pageable pageable);
 
 //    @Query("select sum(r.rate) from Review r")
 //    int getRateOfProductById(String id);

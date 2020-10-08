@@ -1,6 +1,8 @@
 package com.codegym.controller;
 
 import com.codegym.model.Product;
+import com.codegym.model.ProductDetails;
+import com.codegym.service.ProductDetailsService;
 import com.codegym.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +19,9 @@ public class HomeController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private ProductDetailsService detailsService;
 
     @GetMapping("/")
     public ModelAndView index(){
@@ -52,6 +57,8 @@ public class HomeController {
         if(product != null) {
             modelAndView = new ModelAndView("main/product");
             modelAndView.addObject("product",product);
+            ProductDetails details = detailsService.findDetailById(id);
+            modelAndView.addObject("details",details);
         } else {
             modelAndView = new ModelAndView("main/blank");
         }
