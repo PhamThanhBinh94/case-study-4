@@ -308,34 +308,40 @@
             </div>
 
             <!-- Order Details -->
+
             <div class="col-md-5 order-details">
+                <button><a th:href="@{/}">Continue Shopping</a></button>
                 <div class="section-title text-center">
                     <h3 class="title">Your Order</h3>
                 </div>
+                <form method="post" th:action="${'/checkout/update'}">
                 <div class="order-summary">
                     <div class="order-col">
                         <div><strong>PRODUCT</strong></div>
+                        <div><strong>QUANTITY</strong></div>
                         <div><strong>TOTAL</strong></div>
                     </div>
                     <div class="order-products">
-                        <div class="order-col">
-                            <div>1x Product Name Goes Here</div>
-                            <div>$980.00</div>
-                        </div>
-                        <div class="order-col">
-                            <div>2x Product Name Goes Here</div>
-                            <div>$980.00</div>
-                        </div>
+                        <th:block th:each="item : ${session.cart}">
+                            <div class="order-col">
+                                <div><span th:text="${item.product.name}"></span></div>
+                                <div><input type="number" th:value="${item.quantity}" name="quantity" style="width: 50px;"/><a th:href="${'/checkout/remove/' + item.product.id}">X</a></div>
+                            </td>
+                                <div><span th:text="${#numbers.formatDecimal(item.product.price * item.quantity,3,'POINT',0,'COMMA')}"></span></div>
+                            </div>
+                        </th:block>
                     </div>
                     <div class="order-col">
                         <div>Shiping</div>
                         <div><strong>FREE</strong></div>
                     </div>
+                    <div><input type="submit" value="Update"></div>
                     <div class="order-col">
                         <div><strong>TOTAL</strong></div>
-                        <div><strong class="order-total">$2940.00</strong></div>
+                        <div><strong class="order-total"><span th:text="${#numbers.formatDecimal(total,3,'POINT',0,'COMMA')}"></span></strong></div>
                     </div>
                 </div>
+                </form>
                 <div class="payment-method">
                     <div class="input-radio">
                         <input type="radio" name="payment" id="payment-1">

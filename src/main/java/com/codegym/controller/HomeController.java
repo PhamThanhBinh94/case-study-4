@@ -40,10 +40,10 @@ public class HomeController {
         return modelAndView;
     }
 
-    @GetMapping("/checkout")
-    public String checkout(){
-        return "main/checkout";
-    }
+//    @GetMapping("/checkout")
+//    public String checkout(){
+//        return "main/checkout";
+//    }
 
     @GetMapping("/chi-tiet/{id}")
     public ModelAndView product(@PathVariable("id") String id){
