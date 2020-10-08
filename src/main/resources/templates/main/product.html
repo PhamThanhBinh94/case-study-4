@@ -335,7 +335,7 @@
                     <ul class="tab-nav">
                         <li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
                         <li><a data-toggle="tab" href="#tab2">Details</a></li>
-                        <li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li>
+                        <li><a data-toggle="tab" href="#tab3">Reviews (<span id="sum_of_rating">3</span>)</a></li>
                     </ul>
                     <!-- /product tab nav -->
 
@@ -368,8 +368,8 @@
                                 <div class="col-md-3">
                                     <div id="rating">
                                         <div class="rating-avg">
-                                            <span>4.5</span>
-                                            <div class="rating-stars">
+                                            <span id="average_rating">4.5</span>
+                                            <div id="average_star" class="rating-stars">
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
@@ -387,7 +387,7 @@
                                                     <i class="fa fa-star"></i>
                                                 </div>
                                                 <div class="rating-progress">
-                                                    <div style="width: 80%;"></div>
+                                                    <div id="percent_of_5" style="width: 80%;"></div>
                                                 </div>
                                                 <span id="5stars" class="sum">3</span>
                                             </li>
@@ -400,7 +400,7 @@
                                                     <i class="fa fa-star-o"></i>
                                                 </div>
                                                 <div class="rating-progress">
-                                                    <div style="width: 60%;"></div>
+                                                    <div id="percent_of_4" style="width: 60%;"></div>
                                                 </div>
                                                 <span id="4stars" class="sum">2</span>
                                             </li>
@@ -413,7 +413,7 @@
                                                     <i class="fa fa-star-o"></i>
                                                 </div>
                                                 <div class="rating-progress">
-                                                    <div></div>
+                                                    <div id="percent_of_3" style="width: 0%;"></div>
                                                 </div>
                                                 <span id="3stars" class="sum">0</span>
                                             </li>
@@ -426,7 +426,7 @@
                                                     <i class="fa fa-star-o"></i>
                                                 </div>
                                                 <div class="rating-progress">
-                                                    <div></div>
+                                                    <div id="percent_of_2" style="width: 0%;"></div>
                                                 </div>
                                                 <span id="2stars" class="sum">0</span>
                                             </li>
@@ -439,7 +439,7 @@
                                                     <i class="fa fa-star-o"></i>
                                                 </div>
                                                 <div class="rating-progress">
-                                                    <div></div>
+                                                    <div id="percent_of_1" style="width: 0%;"></div>
                                                 </div>
                                                 <span id="1star" class="sum">0</span>
                                             </li>
@@ -451,7 +451,7 @@
                                 <!-- Reviews -->
                                 <div class="col-md-6">
                                     <div id="reviews">
-                                        <ul class="reviews">
+                                        <ul class="reviews tab-pane" id="review_tab_1">
                                             <li>
                                                 <div class="review-heading">
                                                     <h5 class="name">John</h5>
@@ -487,6 +487,56 @@
                                             <li>
                                                 <div class="review-heading">
                                                     <h5 class="name">John</h5>
+                                                    <p class="date">27 DEC 2018, 8:0 PM</p>
+                                                    <div class="review-rating">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star-o empty"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="review-body">
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <ul class="reviews tab-pane" id="review_tab_2">
+                                            <li>
+                                                <div class="review-heading">
+                                                    <h5 class="name">Tuyen</h5>
+                                                    <p class="date">27 DEC 2018, 8:0 PM</p>
+                                                    <div class="review-rating">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star-o empty"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="review-body">
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="review-heading">
+                                                    <h5 class="name">Linh</h5>
+                                                    <p class="date">27 DEC 2018, 8:0 PM</p>
+                                                    <div class="review-rating">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star-o empty"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="review-body">
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="review-heading">
+                                                    <h5 class="name">Nguyet</h5>
                                                     <p class="date">27 DEC 2018, 8:0 PM</p>
                                                     <div class="review-rating">
                                                         <i class="fa fa-star"></i>
@@ -502,8 +552,8 @@
                                             </li>
                                         </ul>
                                         <ul class="reviews-pagination">
-                                            <li class="active">1</li>
-                                            <li><a href="#">2</a></li>
+                                            <li class="active"><a href="#review_tab_1">1</a></li>
+                                            <li><a href="#review_tab_2">2</a></li>
                                             <li><a href="#">3</a></li>
                                             <li><a href="#">4</a></li>
                                             <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
@@ -863,12 +913,55 @@
                 url : "/reviews/add",
                 success : function (data){
                     $('#1star').html(data[0]);
-                    $('#2stars').html(data[2]);
-                    $('#3stars').html(data[3]);
-                    $('#4stars').html(data[4]);
-                    $('#5stars').html(data[5]);
+                    $('#2stars').html(data[1]);
+                    $('#3stars').html(data[2]);
+                    $('#4stars').html(data[3]);
+                    $('#5stars').html(data[4]);
+                    let number_of_rates = (data[0] + data[1] + data[2] + data[3] + data[4]);
+                    $('#sum_of_rating').html(number_of_rates);
+                    let percent_of_1 = Math.floor(data[0]*100/number_of_rates);
+                    let percent_of_2 = Math.floor(data[1]*100/number_of_rates);
+                    let percent_of_3 = Math.floor(data[2]*100/number_of_rates);
+                    let percent_of_4 = Math.floor(data[3]*100/number_of_rates);
+                    let percent_of_5 = Math.floor(data[4]*100/number_of_rates);
+                    $('#percent_of_1').attr('style', 'width: ' + percent_of_1 + '%');
+                    $('#percent_of_2').attr('style', 'width: ' + percent_of_2 + '%');
+                    $('#percent_of_3').attr('style', 'width: ' + percent_of_3 + '%');
+                    $('#percent_of_4').attr('style', 'width: ' + percent_of_4 + '%');
+                    $('#percent_of_5').attr('style', 'width: ' + percent_of_5 + '%');
+                    let average_of_rate = 0;
+                    for (let i=0; i < data.length; i++){
+                        average_of_rate += (i+1)*data[i]/number_of_rates;
+                    }
+                    $('#average_rating').html(average_of_rate.toFixed(1));
+                    let render_rating_star = "";
+                    for (let i=0; i < Math.round(average_of_rate); i++){
+                        render_rating_star += '<i class="fa fa-star"></i> ';
+                    }
+                    for (let i=0; i < (5-Math.round(average_of_rate)); i++) {
+                        render_rating_star += '<i class="fa fa-star-o"></i> ';
+                    }
+                    $('#average_star').html(render_rating_star);
                 }
             });
+
+            $.ajax({
+                headers: {
+                    'Accept' : 'application/json',
+                    'Content-type' : 'application/json'
+                },
+                type : "POST",
+                url : "/reviews/get",
+                data: JSON.stringify({
+                   'id' : product
+                }),
+                success : function (response) {
+                    for(let i=0; i < response.content.length; i++){
+                        console.log(response.content[i]);
+                    }
+                }
+            });
+
             event.preventDefault();
         });
     });
