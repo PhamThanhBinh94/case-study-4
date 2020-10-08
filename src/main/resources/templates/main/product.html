@@ -335,7 +335,7 @@
                     <ul class="tab-nav">
                         <li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
                         <li><a data-toggle="tab" href="#tab2">Details</a></li>
-                        <li><a data-toggle="tab" href="#tab3">Reviews (<span id="sum_of_rating">3</span>)</a></li>
+                        <li><a data-toggle="tab" href="#tab3">Reviews <span id="sum_of_rating"></span></a></li>
                     </ul>
                     <!-- /product tab nav -->
 
@@ -451,7 +451,7 @@
                                 <!-- Reviews -->
                                 <div class="col-md-6">
                                     <div id="reviews">
-                                        <ul class="reviews tab-pane" id="review_tab_1">
+                                        <ul class="reviews">
                                             <li>
                                                 <div class="review-heading">
                                                     <h5 class="name">John</h5>
@@ -487,56 +487,6 @@
                                             <li>
                                                 <div class="review-heading">
                                                     <h5 class="name">John</h5>
-                                                    <p class="date">27 DEC 2018, 8:0 PM</p>
-                                                    <div class="review-rating">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-o empty"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="review-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        <ul class="reviews tab-pane" id="review_tab_2">
-                                            <li>
-                                                <div class="review-heading">
-                                                    <h5 class="name">Tuyen</h5>
-                                                    <p class="date">27 DEC 2018, 8:0 PM</p>
-                                                    <div class="review-rating">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-o empty"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="review-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="review-heading">
-                                                    <h5 class="name">Linh</h5>
-                                                    <p class="date">27 DEC 2018, 8:0 PM</p>
-                                                    <div class="review-rating">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-o empty"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="review-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="review-heading">
-                                                    <h5 class="name">Nguyet</h5>
                                                     <p class="date">27 DEC 2018, 8:0 PM</p>
                                                     <div class="review-rating">
                                                         <i class="fa fa-star"></i>
@@ -552,8 +502,8 @@
                                             </li>
                                         </ul>
                                         <ul class="reviews-pagination">
-                                            <li class="active"><a href="#review_tab_1">1</a></li>
-                                            <li><a href="#review_tab_2">2</a></li>
+                                            <li class="active"><a href="#">1</a></li>
+                                            <li><a href="#">2</a></li>
                                             <li><a href="#">3</a></li>
                                             <li><a href="#">4</a></li>
                                             <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
@@ -881,20 +831,22 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function (){
+        let product = $('#product_id').val();
+
+        getListReviews(product);
+
+        getRates(product);
+
         $('#review_form').submit(function (event){
-            let product = $('#product_id').val();
             let name = $('#customer_name').val();
             let phone = $('#customer_phone').val();
             let email = $('#customer_email').val();
             let content = $('#review_content').val();
             let star = 0;
-            console.log(product);
-            console.log(name + " " + phone + " " + email);
-            console.log(content);
+
             if($("input[type='radio'].radioBtn").is(':checked')) {
                 star = $("input[type='radio'].radioBtn:checked").val();
             }
-            console.log(star);
             let json = {
                 'productId' : product,
                 'customerName' : name,
@@ -905,66 +857,113 @@
             };
             $.ajax({
                 headers: {
-                    'Accept' : 'application/json',
                     'Content-type' : 'application/json'
                 },
                 type : "POST",
                 data : JSON.stringify(json),
                 url : "/reviews/add",
-                success : function (data){
-                    $('#1star').html(data[0]);
-                    $('#2stars').html(data[1]);
-                    $('#3stars').html(data[2]);
-                    $('#4stars').html(data[3]);
-                    $('#5stars').html(data[4]);
-                    let number_of_rates = (data[0] + data[1] + data[2] + data[3] + data[4]);
-                    $('#sum_of_rating').html(number_of_rates);
-                    let percent_of_1 = Math.floor(data[0]*100/number_of_rates);
-                    let percent_of_2 = Math.floor(data[1]*100/number_of_rates);
-                    let percent_of_3 = Math.floor(data[2]*100/number_of_rates);
-                    let percent_of_4 = Math.floor(data[3]*100/number_of_rates);
-                    let percent_of_5 = Math.floor(data[4]*100/number_of_rates);
-                    $('#percent_of_1').attr('style', 'width: ' + percent_of_1 + '%');
-                    $('#percent_of_2').attr('style', 'width: ' + percent_of_2 + '%');
-                    $('#percent_of_3').attr('style', 'width: ' + percent_of_3 + '%');
-                    $('#percent_of_4').attr('style', 'width: ' + percent_of_4 + '%');
-                    $('#percent_of_5').attr('style', 'width: ' + percent_of_5 + '%');
-                    let average_of_rate = 0;
-                    for (let i=0; i < data.length; i++){
-                        average_of_rate += (i+1)*data[i]/number_of_rates;
-                    }
-                    $('#average_rating').html(average_of_rate.toFixed(1));
-                    let render_rating_star = "";
-                    for (let i=0; i < Math.round(average_of_rate); i++){
-                        render_rating_star += '<i class="fa fa-star"></i> ';
-                    }
-                    for (let i=0; i < (5-Math.round(average_of_rate)); i++) {
-                        render_rating_star += '<i class="fa fa-star-o"></i> ';
-                    }
-                    $('#average_star').html(render_rating_star);
-                }
-            });
+                success : function (){
+                    getListReviews(product);
 
-            $.ajax({
-                headers: {
-                    'Accept' : 'application/json',
-                    'Content-type' : 'application/json'
-                },
-                type : "POST",
-                url : "/reviews/get",
-                data: JSON.stringify({
-                   'id' : product
-                }),
-                success : function (response) {
-                    for(let i=0; i < response.content.length; i++){
-                        console.log(response.content[i]);
-                    }
+                    getRates(product);
+
+                    $('#customer_name').html('');
+                    $('#customer_phone').html('');
+                    $('#customer_email').html('');
+                    $('#review_content').html('');
                 }
             });
 
             event.preventDefault();
         });
     });
+
+    function getRates(product){
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json'
+            },
+            type: "POST",
+            url: "/reviews/get-rate",
+            data: JSON.stringify({
+                'id': product
+            }),
+            success : function (data){
+                $('#1star').html(data[0]);
+                $('#2stars').html(data[1]);
+                $('#3stars').html(data[2]);
+                $('#4stars').html(data[3]);
+                $('#5stars').html(data[4]);
+                let number_of_rates = (data[0] + data[1] + data[2] + data[3] + data[4]);
+                $('#sum_of_rating').html('(' + number_of_rates + ')');
+                let percent_of_1 = Math.floor(data[0]*100/number_of_rates);
+                let percent_of_2 = Math.floor(data[1]*100/number_of_rates);
+                let percent_of_3 = Math.floor(data[2]*100/number_of_rates);
+                let percent_of_4 = Math.floor(data[3]*100/number_of_rates);
+                let percent_of_5 = Math.floor(data[4]*100/number_of_rates);
+                $('#percent_of_1').attr('style', 'width: ' + percent_of_1 + '%');
+                $('#percent_of_2').attr('style', 'width: ' + percent_of_2 + '%');
+                $('#percent_of_3').attr('style', 'width: ' + percent_of_3 + '%');
+                $('#percent_of_4').attr('style', 'width: ' + percent_of_4 + '%');
+                $('#percent_of_5').attr('style', 'width: ' + percent_of_5 + '%');
+                let average_of_rate = 0;
+                for (let i=0; i < data.length; i++){
+                    average_of_rate += (i+1)*data[i]/number_of_rates;
+                }
+                $('#average_rating').html(average_of_rate.toFixed(1));
+                let render_rating_star = "";
+                for (let i=0; i < Math.round(average_of_rate); i++){
+                    render_rating_star += '<i class="fa fa-star"></i> ';
+                }
+                for (let i=0; i < (5-Math.round(average_of_rate)); i++) {
+                    render_rating_star += '<i class="fa fa-star-o"></i> ';
+                }
+                $('#average_star').html(render_rating_star);
+            }
+        })
+    }
+
+    function getListReviews(product) {
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json'
+            },
+            type: "POST",
+            url: "/reviews/get-review",
+            data: JSON.stringify({
+                'id': product
+            }),
+            success: function (response) {
+                let review = '';
+                for (let i = 0; i < response.content.length; i++) {
+
+                    let rate_star = '';
+                    let response_rate = parseInt(response.content[i].rate);
+                    for (let i = 0; i < response_rate; i++) {
+                        rate_star += '<i class="fa fa-star"></i>\n';
+                    }
+                    for (let i = 0; i < (5 - response_rate); i++) {
+                        rate_star += '<i class="fa fa-star-o"></i>\n';
+                    }
+
+                    review += '<li>\n' +
+                        '                                                <div class="review-heading">\n' +
+                        '                                                    <h5 class="name">' + response.content[i].customerName + '</h5>\n' +
+                        '                                                    <p class="date">' + response.content[i].date.substr(0, 10) + '</p>\n' +
+                        '                                                    <div class="review-rating">\n' + rate_star +
+                        '                                                    </div>\n' +
+                        '                                                </div>\n' +
+                        '                                                <div class="review-body">\n' +
+                        '                                                    <p>' + response.content[i].content + '</p>\n' +
+                        '                                                </div>\n' +
+                        '                                            </li>';
+                }
+                $('.reviews').html(review);
+            }
+        });
+    }
 </script>
 </body>
 </html>
