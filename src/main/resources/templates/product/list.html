@@ -16,7 +16,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <header class="container-fluid">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div sec:authorize="isAuthenticated()">
-                <a class="navbar-brand" href="/products/"><span sec:authentication="principal.username"></span></a>
+<!--                <a class="navbar-brand" href="/products/"></a>-->
+<!--                    <b><span sec:authentication="principal.username"></span></b>-->
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -113,18 +114,27 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
         </th:block>
         </tbody>
     </table>
-    <div >
-        <a th:if="${products.hasPrevious()}"
-           th:href="@{'/products'(page=${products.number - 1}, size=${products.size},s=${keyword})}">
-            Previous
-        </a>
-        [[${products.number + 1}]]/[[${products.totalPages}]]
-        <a th:if="${products.hasNext()}"
-           th:href="@{'/products'(page=${products.number + 1}, size=${products.size},s=${keyword})}">
-            Next
-        </a>
+    <div th:if="${keyword != null}">
+        <a th:href="@{'/products'(page=${products.number - 1},size=${products.size},s=${keyword})}" th:if="${products.hasPrevious()}">Previous</a>
+        <span th:text="${products.number + 1}"></span>/<span th:text="${products.totalPages}"></span>
+        <a th:href="@{'/products'(page=${products.number + 1},size=${products.size},s=${keyword})}" th:if="${products.hasNext()}">Next</a>
     </div>
+    <div th:if="${keyword == null}">
+        <a th:href="@{'/products'(page=${products.number - 1},size=${products.size})}" th:if="${products.hasPrevious()}">Previous</a>
+        <span th:text="${products.number + 1}"></span>/<span th:text="${products.totalPages}"></span>
+        <a th:href="@{'/products'(page=${products.number + 1},size=${products.size})}" th:if="${products.hasNext()}">Next</a>
+    </div>
+<!--        <a th:if="${products.hasPrevious()}"-->
+<!--           th:href="@{'/products'(page=${products.number - 1}, size=${products.size},s=${keyword})}">-->
+<!--            Previous-->
+<!--        </a>-->
+<!--        [[${products.number + 1}]]/[[${products.totalPages}]]-->
+<!--        <a th:if="${products.hasNext()}"-->
+<!--           th:href="@{'/products'(page=${products.number + 1}, size=${products.size},s=${keyword})}">-->
+<!--            Next-->
+<!--        </a>-->
+
 </div>
 
 </body>
-</html>
+</html>z

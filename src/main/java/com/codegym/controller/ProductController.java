@@ -21,8 +21,10 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("")
-    public ModelAndView listProducts(@RequestParam("s") Optional<String> s, Pageable pageable) {
+    public ModelAndView listProducts(Optional<String> s, Pageable pageable) {
         Page<Product> products;
+        System.out.println("s: " + s);
+        System.out.println(s.isPresent());
         if (s.isPresent()){
             products = productService.findAllByTypeOrIdOrOrBrand(s.get(),s.get(),s.get(),pageable);
         }else {
