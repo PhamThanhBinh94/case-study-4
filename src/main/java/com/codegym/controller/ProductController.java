@@ -1,6 +1,8 @@
 package com.codegym.controller;
 
 import com.codegym.model.Product;
+import com.codegym.model.ProductDetails;
+import com.codegym.service.ProductDetailsService;
 import com.codegym.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,9 +22,14 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private ProductDetailsService detailsService;
+
     @GetMapping("")
-    public ModelAndView listProducts(@RequestParam("s") Optional<String> s, Pageable pageable) {
+    public ModelAndView listProducts(Optional<String> s, Pageable pageable) {
         Page<Product> products;
+        System.out.println("s: " + s);
+        System.out.println(s.isPresent());
         if (s.isPresent()){
             products = productService.findAllByTypeOrIdOrOrBrand(s.get(),s.get(),s.get(),pageable);
         }else {
@@ -50,7 +57,7 @@ public class ProductController {
     }
 
     @GetMapping("/edit/{id}")
-    public ModelAndView showEditUser(@PathVariable String id){
+    public ModelAndView showEditProduct(@PathVariable String id){
         Product product = productService.findById(id);
         ModelAndView modelAndView = new ModelAndView("product/edit");
         modelAndView.addObject("products",product);
@@ -58,7 +65,7 @@ public class ProductController {
     }
 
     @PostMapping("/edit")
-    public ModelAndView updateUser(@ModelAttribute("product") Product product) throws IOException {
+    public ModelAndView updateProduct(@ModelAttribute("product") Product product) throws IOException {
         productService.save(product);
         ModelAndView modelAndView = new ModelAndView("product/edit");
         modelAndView.addObject("products", new Product());
@@ -66,9 +73,19 @@ public class ProductController {
     }
 
     @GetMapping("/delete/{id}")
-    public ModelAndView deleteUser(@PathVariable String id){
+    public ModelAndView deleteProduct(@PathVariable String id){
         productService.deleteById(id);
         ModelAndView modelAndView = new ModelAndView("redirect:/products");
+        return modelAndView;
+    }
+
+    @GetMapping("/view/{id}")
+    public ModelAndView viewProduct(@PathVariable String id){
+        ModelAndView modelAndView = new ModelAndView("product/view");
+        Product product = productService.findById(id);
+        ProductDetails details = detailsService.findDetailById(id);
+        modelAndView.addObject("product",product);
+        modelAndView.addObject("details",details);
         return modelAndView;
     }
 }

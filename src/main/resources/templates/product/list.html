@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>List Products</title>
@@ -13,7 +15,9 @@
 <div class="container-fluid">
     <header class="container-fluid">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">ADMIN</a>
+            <div sec:authorize="isAuthenticated()">
+                <a class="navbar-brand" href="/products/"><span sec:authentication="principal.username"></span></a>
+            </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -45,12 +49,15 @@
 <!--                    <li class="nav-item"><a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>-->
 <!--                    </li>-->
                 </ul>
-                    <form class="form-inline my-2 my-lg-0" >
+                    <form class="form-inline my-2 my-lg-0">
                         <input class="form-control mr-sm-2" name="s" type="text" th:value="${keyword}" placeholder="Id, Brand, Type">
-<!--                        <button  class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm sản phẩm</button>-->
+                        <button  class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm sản phẩm</button>
                     </form>
             </div>
-            <a href="/products/create" class="btn btn-success" role="button" style="float: right">Create new product</a>
+            <div >
+                <a href="/products/create" class="btn btn-success" role="button" style="float: right">Create new product</a>
+            </div>
+
         </nav>
     </header>
 </div>
@@ -72,47 +79,50 @@
 
 
 
-
-<table class="table" border="1">
-    <thead class="thead-dark">
-    <tr>
-        <th>ID</th>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Brand</th>
-        <th>Price</th>
-        <th>Image</th>
-        <th>Amount</th>
-        <th>Edit</th>
-        <th>Delete</th>
-    </tr>
-    </thead>
-    <tbody>
-    <th:block th:each="product : ${products}">
+<div class="container">
+    <table class="table" border="1">
+        <thead class="thead-dark">
         <tr>
-            <td th:text="${product.id}"></td>
-            <td th:text="${product.type}"></td>
-            <td th:text="${product.name}"></td>
-            <td th:text="${product.brand}"></td>
-            <td th:text="${#numbers.formatDecimal(product.price,3,'POINT',0,'COMMA')}"></td>
-            <td><img th:src="${product.image}"></td>
-            <td th:text="${product.amount}"></td>
-            <td><a th:href="@{/products/edit/__${product.id}__}" class="btn btn-success" role="button">Edit</a></td>
-            <td><a th:href="@{/products/delete/__${product.id}__}" class="btn btn-success" role="button" onclick="return confirm('Are you sure?')">Delete</a></td>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Brand</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Amount</th>
+            <th>View</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
-    </th:block>
-    </tbody>
-</table>
-<div >
-    <a th:if="${products.hasPrevious()}"
-       th:href="@{'/products'(page=${products.number - 1}, size=${products.size},s=${keyword})}">
-        Previous
-    </a>
-    [[${products.number + 1}]]/[[${products.totalPages}]]
-    <a th:if="${products.hasNext()}"
-       th:href="@{'/products'(page=${products.number + 1}, size=${products.size},s=${keyword})}">
-        Next
-    </a>
+        </thead>
+        <tbody>
+        <th:block th:each="product : ${products}">
+            <tr>
+                <td th:text="${product.id}"></td>
+                <td th:text="${product.type}"></td>
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.brand}"></td>
+                <td th:text="${#numbers.formatDecimal(product.price,3,'POINT',0,'COMMA')}"></td>
+                <td><img th:src="${product.image}"></td>
+                <td th:text="${product.amount}"></td>
+                <td><a th:href="@{/products/view/__${product.id}__}" class="btn btn-success" role="button">View</a></td>
+                <td><a th:href="@{/products/edit/__${product.id}__}" class="btn btn-success" role="button">Edit</a></td>
+                <td><a th:href="@{/products/delete/__${product.id}__}" class="btn btn-success" role="button" onclick="return confirm('Are you sure?')">Delete</a></td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+    <div th:if="${keyword != null}">
+        <a th:href="@{'/products'(page=${products.number - 1},size=${products.size},s=${keyword})}" th:if="${products.hasPrevious()}">Previous</a>
+        <span th:text="${products.number + 1}"></span>/<span th:text="${products.totalPages}"></span>
+        <a th:href="@{'/products'(page=${products.number + 1},size=${products.size},s=${keyword})}" th:if="${products.hasNext()}">Next</a>
+    </div>
+    <div th:if="${keyword == null}">
+        <a th:href="@{'/products'(page=${products.number - 1},size=${products.size})}" th:if="${products.hasPrevious()}">Previous</a>
+        <span th:text="${products.number + 1}"></span>/<span th:text="${products.totalPages}"></span>
+        <a th:href="@{'/products'(page=${products.number + 1},size=${products.size})}" th:if="${products.hasNext()}">Next</a>
+    </div>
+
 </div>
 </body>
 </html>

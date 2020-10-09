@@ -54,7 +54,7 @@
 <div align="center">
     <div>
         <br/>
-        <h3>Hóa đơn chi tiết </h3>
+        <h3>Thông tin hóa đơn </h3>
         <br/>
     </div>
     <table align="center" border="1" cellpadding="5" class="table table-hover col-md-3" >
@@ -80,47 +80,32 @@
                 <td  th:text="${bill.getStatus()}"></td>
             </tr>
         </th:block>
-        <th:block th:each="details : ${billDetails}">
-            <tr>
-                <th class="thead-dark">Product ID:</th>
-                <td  th:text="${details.productId}"></td>
+    </table>
+    <div>
+        <br/>
+        <h3>Hóa đơn</h3>
+        <br/>
+    </div>
+        <table border="1" cellpadding="5" class="table table-hover col-md-3 ">
+            <tr class="thead-dark">
+                <th>NO</th>
+                <th>Product ID</th>
+                <th>Amount</th>
+                <th>Unit price</th>
             </tr>
+            <th:block th:each="details,state : ${billDetails}">
             <tr>
-                <th class="thead-dark">Unit Price:</th>
+                <td th:text="${state.count}"></td>
+                <td  th:text="${details.productId}"></td>
+                <td  th:text="${details.amount}"></td>
                 <td  th:text="${details.unit_price}"></td>
             </tr>
+            </th:block>
             <tr>
-                <th class="thead-dark">Amount :</th>
-                <td  th:text="${details.amount}"></td>
+                <td>Total</td>
+                <td colspan="3"></td>
             </tr>
-        </th:block>
-    </table>
+        </table>
 </div>
 </body>
 </html>
-<!--    <p>Customer information</p>-->
-<!--    <h5 >Hóa đơn</h5>-->
-<!--    <table border="1" cellpadding="5" class="table table-hover col-md-3 ">-->
-<!--        <tr class="thead-dark">-->
-<!--            <th>NO</th>-->
-<!--            <th>Product ID</th>-->
-<!--            <th>Unit price</th>-->
-<!--            <th>Amount</th>-->
-<!--        </tr>-->
-<!--        <c:forEach var="detail" items="${details}">-->
-<!--            <tr>-->
-<!--                <td  th:text="${details.indexOf(detail) + 1}"/></td>-->
-<!--                <th:forTokens items="${detail}" delims="__" var="token">-->
-<!--                    <td  th:text="${token}"/></td>-->
-<!--                </th:forTokens>-->
-<!--            </tr>-->
-<!--        </c:forEach>-->
-<!--        <tr>-->
-<!--            <td></td>-->
-<!--            <td>Total</td>-->
-<!--            <td colspan="2"  th:text="${total}"/></td>-->
-<!--        </tr>-->
-<!--    </table>-->
-<!--</div>-->
-<!--</body>-->
-<!--</html>-->

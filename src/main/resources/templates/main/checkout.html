@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
+    <meta name="_csrf" content="${_csrf.token}"/>
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
     <title>Electro - HTML Ecommerce Template</title>
 
     <!-- Google font -->
@@ -216,21 +217,21 @@
                     <div class="form-group">
                         <input id="customerName" class="input" type="text" name="first-name" placeholder="Name">
                     </div>
-<!--                    <div class="form-group">-->
-<!--                        <input class="input" type="text" name="last-name" placeholder="Last Name">-->
-<!--                    </div>-->
+                    <!--                    <div class="form-group">-->
+                    <!--                        <input class="input" type="text" name="last-name" placeholder="Last Name">-->
+                    <!--                    </div>-->
                     <div class="form-group">
                         <input id="customerEmail" class="input" type="email" name="email" placeholder="Email">
                     </div>
                     <div class="form-group">
                         <input id="customerAddress" class="input" type="text" name="address" placeholder="Address">
                     </div>
-<!--                    <div class="form-group">-->
-<!--                        <input class="input" type="text" name="city" placeholder="City">-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <input class="input" type="text" name="country" placeholder="Country">-->
-<!--                    </div>-->
+                    <!--                    <div class="form-group">-->
+                    <!--                        <input class="input" type="text" name="city" placeholder="City">-->
+                    <!--                    </div>-->
+                    <!--                    <div class="form-group">-->
+                    <!--                        <input class="input" type="text" name="country" placeholder="Country">-->
+                    <!--                    </div>-->
                     <div class="form-group">
                         <input class="input" type="text" name="zip-code" placeholder="ZIP Code">
                     </div>
@@ -253,46 +254,46 @@
                 </div>
                 <!-- /Billing Details -->
 
-<!--                &lt;!&ndash; Shiping Details &ndash;&gt;-->
-<!--                <div class="shiping-details">-->
-<!--                    <div class="section-title">-->
-<!--                        <h3 class="title">Shiping address</h3>-->
-<!--                    </div>-->
-<!--                    <div class="input-checkbox">-->
-<!--                        <input type="checkbox" id="shiping-address">-->
-<!--                        <label for="shiping-address">-->
-<!--                            <span></span>-->
-<!--                            Ship to a diffrent address?-->
-<!--                        </label>-->
-<!--                        <div class="caption">-->
-<!--                            <div class="form-group">-->
-<!--                                <input class="input" type="text" name="first-name" placeholder="First Name">-->
-<!--                            </div>-->
-<!--                            <div class="form-group">-->
-<!--                                <input class="input" type="text" name="last-name" placeholder="Last Name">-->
-<!--                            </div>-->
-<!--                            <div class="form-group">-->
-<!--                                <input class="input" type="email" name="email" placeholder="Email">-->
-<!--                            </div>-->
-<!--                            <div class="form-group">-->
-<!--                                <input class="input" type="text" name="address" placeholder="Address">-->
-<!--                            </div>-->
-<!--                            <div class="form-group">-->
-<!--                                <input class="input" type="text" name="city" placeholder="City">-->
-<!--                            </div>-->
-<!--                            <div class="form-group">-->
-<!--                                <input class="input" type="text" name="country" placeholder="Country">-->
-<!--                            </div>-->
-<!--                            <div class="form-group">-->
-<!--                                <input class="input" type="text" name="zip-code" placeholder="ZIP Code">-->
-<!--                            </div>-->
-<!--                            <div class="form-group">-->
-<!--                                <input class="input" type="tel" name="tel" placeholder="Telephone">-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                &lt;!&ndash; /Shiping Details &ndash;&gt;-->
+                <!--                &lt;!&ndash; Shiping Details &ndash;&gt;-->
+                <!--                <div class="shiping-details">-->
+                <!--                    <div class="section-title">-->
+                <!--                        <h3 class="title">Shiping address</h3>-->
+                <!--                    </div>-->
+                <!--                    <div class="input-checkbox">-->
+                <!--                        <input type="checkbox" id="shiping-address">-->
+                <!--                        <label for="shiping-address">-->
+                <!--                            <span></span>-->
+                <!--                            Ship to a diffrent address?-->
+                <!--                        </label>-->
+                <!--                        <div class="caption">-->
+                <!--                            <div class="form-group">-->
+                <!--                                <input class="input" type="text" name="first-name" placeholder="First Name">-->
+                <!--                            </div>-->
+                <!--                            <div class="form-group">-->
+                <!--                                <input class="input" type="text" name="last-name" placeholder="Last Name">-->
+                <!--                            </div>-->
+                <!--                            <div class="form-group">-->
+                <!--                                <input class="input" type="email" name="email" placeholder="Email">-->
+                <!--                            </div>-->
+                <!--                            <div class="form-group">-->
+                <!--                                <input class="input" type="text" name="address" placeholder="Address">-->
+                <!--                            </div>-->
+                <!--                            <div class="form-group">-->
+                <!--                                <input class="input" type="text" name="city" placeholder="City">-->
+                <!--                            </div>-->
+                <!--                            <div class="form-group">-->
+                <!--                                <input class="input" type="text" name="country" placeholder="Country">-->
+                <!--                            </div>-->
+                <!--                            <div class="form-group">-->
+                <!--                                <input class="input" type="text" name="zip-code" placeholder="ZIP Code">-->
+                <!--                            </div>-->
+                <!--                            <div class="form-group">-->
+                <!--                                <input class="input" type="tel" name="tel" placeholder="Telephone">-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <!--                &lt;!&ndash; /Shiping Details &ndash;&gt;-->
 
                 <!-- Order notes -->
                 <div class="order-notes">
@@ -309,32 +310,32 @@
                     <h3 class="title">Your Order</h3>
                 </div>
                 <form method="post" th:action="${'/checkout/update'}">
-                <div class="order-summary">
-                    <div class="order-col">
-                        <div><strong>PRODUCT</strong></div>
-                        <div><strong>QUANTITY</strong></div>
-                        <div><strong>TOTAL</strong></div>
+                    <div class="order-summary">
+                        <div class="order-col">
+                            <div><strong>PRODUCT</strong></div>
+                            <div><strong>QUANTITY</strong></div>
+                            <div><strong>TOTAL</strong></div>
+                        </div>
+                        <div class="order-products">
+                            <th:block th:each="item : ${session.cart}">
+                                <div class="order-col">
+                                    <div><span th:text="${item.product.name}"></span></div>
+                                    <div><input type="number" th:value="${item.quantity}" name="quantity" style="width: 50px;"/><a th:href="${'/checkout/remove/' + item.product.id}">X</a></div>
+                                    </td>
+                                    <div><span th:text="${#numbers.formatDecimal(item.product.price * item.quantity,3,'POINT',0,'COMMA')}"></span></div>
+                                </div>
+                            </th:block>
+                        </div>
+                        <div class="order-col">
+                            <div>Shiping</div>
+                            <div><strong>FREE</strong></div>
+                        </div>
+                        <div><input type="submit" value="Update"></div>
+                        <div class="order-col">
+                            <div><strong>TOTAL</strong></div>
+                            <div><strong class="order-total"><span th:text="${#numbers.formatDecimal(total,3,'POINT',0,'COMMA')}"></span></strong></div>
+                        </div>
                     </div>
-                    <div class="order-products">
-                        <th:block th:each="item : ${session.cart}">
-                            <div class="order-col">
-                                <div><span th:text="${item.product.name}"></span></div>
-                                <div><input type="number" th:value="${item.quantity}" name="quantity" style="width: 50px;"/><a th:href="${'/checkout/remove/' + item.product.id}">X</a></div>
-                            </td>
-                                <div><span th:text="${#numbers.formatDecimal(item.product.price * item.quantity,3,'POINT',0,'COMMA')}"></span></div>
-                            </div>
-                        </th:block>
-                    </div>
-                    <div class="order-col">
-                        <div>Shiping</div>
-                        <div><strong>FREE</strong></div>
-                    </div>
-                    <div><input type="submit" value="Update"></div>
-                    <div class="order-col">
-                        <div><strong>TOTAL</strong></div>
-                        <div><strong class="order-total"><span th:text="${#numbers.formatDecimal(total,3,'POINT',0,'COMMA')}"></span></strong></div>
-                    </div>
-                </div>
                 </form>
                 <div class="payment-method">
                     <div class="input-radio">
@@ -531,12 +532,15 @@
         let email = $('#customerEmail').val();
         let phone = $('#customerPhone').val();
         let address = $('#customerAddress').val();
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
         let json = {
             'name': name,
             'email': email,
             'phone': phone,
             'address': address
         }
+        console.log(json);
         $.ajax({
             headers:{
                 'Content-type': 'application/json'
@@ -544,6 +548,8 @@
             type: "POST",
             url: "/checkout/order",
             data: JSON.stringify(json),
+            header: header,
+            token: token,
             success:function (){
                 console.log('OK');
             }

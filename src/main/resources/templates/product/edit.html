@@ -3,63 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-<p>
-    <a href="/products">List Product</a>
-</p>
-<div>
-    <h2>Create New Product</h2>
-    <form th:action="@{/products/edit}" th:object="${products}" method="post" >
-        <div>
-            <label>ID:</label>
-            <input type="text" th:field="*{id}"/>
+<div class="container-full">
+    <header class="container-full   ">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">ADMIN</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="navbar-brand" href="http://localhost:8080/products">Sản phẩm<span class="sr-only">(current)</span></a>
+                        <a class="navbar-brand" href="http://localhost:8080/customers">Khách hàng <span class="sr-only">(current)</span></a>
+                        <a class="navbar-brand" href="http://localhost:8080/bill">Hóa đơn<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item dropdown ">
+                        <a class="nav-link dropdown-toggle navbar-brand" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Sản phẩm
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/products">Toàn bộ sản phẩm</a>
+                            <a class="dropdown-item" href="/products?type=tivi">Tivi</a>
+                            <a class="dropdown-item" href="/products?type=tu-lanh">Tủ lạnh</a>
+                            <a class="dropdown-item" href="/products?type=dieu-hoa-nhiet-do">Điều hòa</a>
+                            <a class="dropdown-item" href="/products?type=may-giat">Máy giặt</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Khác</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <a href="/products/" class="btn btn-success" role="button" style="float: right">Come back</a>
+        </nav>
+    </header>
+</div>
+<!--<p>-->
+<!--    <a href="/products">List Product</a>-->
+<!--</p>-->
+<div class="col-md-8 order-md-1">
+    <h2>Edit Product</h2>
+    <form class="needs-validation" th:action="@{/products/edit}" th:object="${products}" method="post" >
+        <div class="mb-3">
+<!--            <label>ID:</label>-->
+            <input type="hidden" th:field="*{id}" class="form-control"/>
         </div>
-        <div>
-            <label>Type:</label>
-            <input type="text" th:field="*{type}"/>
+        <div class="mb-3">
+<!--            <label>Type:</label>-->
+            <input type="hidden" th:field="*{type}"/>
         </div>
-        <div>
-            <label>Name:</label>
-            <input type="text" th:field="*{name}"/>
+        <div class="mb-3">
+            <label class="col-sm-2 col-form-label">Name:</label>
+            <div class="col-sm-10">
+            <input type="text" th:field="*{name}" class="form-control"/>
+            </div>
         </div>
-        <div>
-            <label >Brand:</label>
-            <select  th:field="*{brand}">
-                <option th:value="lg" th:text="lg"></option>
-                <option th:value="midea" th:text="midea"></option>
-                <option th:value="gree" th:text="gree"></option>
-                <option th:value="electrolux" th:text="electrolux"></option>
-                <option th:value="daikin" th:text="daikin"></option>
-                <option th:value="hitachi" th:text="hitachi"></option>
-                <option th:value="mdv" th:text="mdv"></option>
-                <option th:value="panasonic" th:text="panasonic"></option>
-                <option th:value="samsung" th:text="samsung"></option>
-                <option th:value="casper" th:text="casper"></option>
-                <option th:value="kangaroo" th:text="kangaroo"></option>
-                <option th:value="aqua" th:text="aqua"></option>
-                <option th:value="hitachi" th:text="hitachi"></option>
-                <option th:value="toshiba" th:text="toshiba"></option>
-                <option th:value="sony" th:text="sony"></option>
-                <option th:value="tcl" th:text="tcl"></option>
-                <option th:value="asanzo" th:text="asanzo"></option>
-            </select>
+<!--        <div class="row">-->
+            <div class="col-md-5 mb-3">
+                <label for="brand">Brand:</label>
+                <select class="custom-select d-block w-100" th:field="*{brand}" id="brand">
+                    <option th:value="lg" th:text="lg"></option>
+                    <option th:value="midea" th:text="midea"></option>
+                    <option th:value="gree" th:text="gree"></option>
+                    <option th:value="electrolux" th:text="electrolux"></option>
+                    <option th:value="daikin" th:text="daikin"></option>
+                    <option th:value="hitachi" th:text="hitachi"></option>
+                    <option th:value="mdv" th:text="mdv"></option>
+                    <option th:value="panasonic" th:text="panasonic"></option>
+                    <option th:value="samsung" th:text="samsung"></option>
+                    <option th:value="casper" th:text="casper"></option>
+                    <option th:value="kangaroo" th:text="kangaroo"></option>
+                    <option th:value="aqua" th:text="aqua"></option>
+                    <option th:value="hitachi" th:text="hitachi"></option>
+                    <option th:value="toshiba" th:text="toshiba"></option>
+                    <option th:value="sony" th:text="sony"></option>
+                    <option th:value="tcl" th:text="tcl"></option>
+                    <option th:value="asanzo" th:text="asanzo"></option>
+                </select>
+            </div>
+<!--        </div>-->
+        <div class="mb-3">
+            <label class="col-sm-2 col-form-label">Price:</label>
+            <div class="col-sm-10">
+            <input type="number"  th:field="*{price}" class="form-control"/>
+            </div>
         </div>
-        <div>
-            <label >Price:</label>
-            <input type="number"  th:field="*{price}"/>
+        <div class="mb-3">
+            <label class="col-sm-2 col-form-label">Image:</label>
+            <div class="col-sm-10">
+            <input type="text"  th:field="*{image}" class="form-control"/>
+            </div>
         </div>
-        <div>
-            <label >Image:</label>
-            <input type="text"  th:field="*{image}"/>
-        </div>
-        <div>
-            <label >Amount:</label>
-            <input type="number"  th:field="*{amount}"/>
+        <div class="mb-3">
+            <label class="col-sm-2 col-form-label">Amount:</label>
+            <div class="col-sm-10">
+            <input type="number"  th:field="*{amount}" class="form-control"/>
+            </div>
         </div>
         <div>
             <label ></label>
-            <input type="submit" value="submit"/>
+            <input type="submit" value="submit" class="btn btn-success btn-lg btn-primary"/>
         </div>
     </form>
 </div>

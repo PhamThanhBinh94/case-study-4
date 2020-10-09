@@ -30,6 +30,7 @@ public class Review {
     private String customerPhone;
 
     @NotNull
+    @Column(columnDefinition = "text")
     private String content;
 
     @NotNull
@@ -40,7 +41,8 @@ public class Review {
     @NotNull
     private int rate;
 
-    public Review(@NotNull String productId, @NotNull String customerName, String customerEmail, @NotNull String customerPhone, @NotNull String content, @NotNull Date date, @NotNull int rate) {
+    public Review(Long id, @NotNull String productId, @NotNull String customerName, String customerEmail, @NotNull String customerPhone, @NotNull String content, @NotNull Date date, @NotNull int rate) {
+        this.id = id;
         this.productId = productId;
         this.customerName = customerName;
         this.customerEmail = customerEmail;
