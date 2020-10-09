@@ -63,15 +63,6 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
         </nav>
     </header>
-</div>
-
-<!--        <form>-->
-<!--            <label><h4>Search by: </h4></label>-->
-<!--            <input name="s" type="text" th:value="${keyword}" placeholder="Id, Brand, Type">-->
-<!--            <input type="submit" value="Search"/>-->
-<!--        </form>-->
-
-<div>
     </br>
     <center>
         <h2 style="float: contour" >Danh sách sản phẩm</h2>
@@ -79,48 +70,54 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     </br>
 </div>
 
-<table class="table" border="1">
-    <thead class="thead-dark">
-    <tr>
-        <th>ID</th>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Brand</th>
-        <th>Price</th>
-        <th>Image</th>
-        <th>Amount</th>
-        <th>View</th>
-        <th>Edit</th>
-        <th>Delete</th>
-    </tr>
-    </thead>
-    <tbody>
-    <th:block th:each="product : ${products}">
+
+
+
+<div class="container">
+    <table class="table" border="1">
+        <thead class="thead-dark">
         <tr>
-            <td th:text="${product.id}"></td>
-            <td th:text="${product.type}"></td>
-            <td th:text="${product.name}"></td>
-            <td th:text="${product.brand}"></td>
-            <td th:text="${#numbers.formatDecimal(product.price,3,'POINT',0,'COMMA')}"></td>
-            <td><img th:src="${product.image}"></td>
-            <td th:text="${product.amount}"></td>
-            <td><a th:href="@{/products/view/__${product.id}__}" class="btn btn-success" role="button">View</a></td>
-            <td><a th:href="@{/products/edit/__${product.id}__}" class="btn btn-success" role="button">Edit</a></td>
-            <td><a th:href="@{/products/delete/__${product.id}__}" class="btn btn-success" role="button" onclick="return confirm('Are you sure?')">Delete</a></td>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Name</th>
+            <th>Brand</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Amount</th>
+            <th>View</th>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
-    </th:block>
-    </tbody>
-</table>
-<div >
-    <a th:if="${products.hasPrevious()}"
-       th:href="@{'/products'(page=${products.number - 1}, size=${products.size},s=${keyword})}">
-        Previous
-    </a>
-    [[${products.number + 1}]]/[[${products.totalPages}]]
-    <a th:if="${products.hasNext()}"
-       th:href="@{'/products'(page=${products.number + 1}, size=${products.size},s=${keyword})}">
-        Next
-    </a>
+        </thead>
+        <tbody>
+        <th:block th:each="product : ${products}">
+            <tr>
+                <td th:text="${product.id}"></td>
+                <td th:text="${product.type}"></td>
+                <td th:text="${product.name}"></td>
+                <td th:text="${product.brand}"></td>
+                <td th:text="${#numbers.formatDecimal(product.price,3,'POINT',0,'COMMA')}"></td>
+                <td><img th:src="${product.image}"></td>
+                <td th:text="${product.amount}"></td>
+                <td><a th:href="@{/products/view/__${product.id}__}" class="btn btn-success" role="button">View</a></td>
+                <td><a th:href="@{/products/edit/__${product.id}__}" class="btn btn-success" role="button">Edit</a></td>
+                <td><a th:href="@{/products/delete/__${product.id}__}" class="btn btn-success" role="button" onclick="return confirm('Are you sure?')">Delete</a></td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+    <div th:if="${keyword != null}">
+        <a th:href="@{'/products'(page=${products.number - 1},size=${products.size},s=${keyword})}" th:if="${products.hasPrevious()}">Previous</a>
+        <span th:text="${products.number + 1}"></span>/<span th:text="${products.totalPages}"></span>
+        <a th:href="@{'/products'(page=${products.number + 1},size=${products.size},s=${keyword})}" th:if="${products.hasNext()}">Next</a>
+    </div>
+    <div th:if="${keyword == null}">
+        <a th:href="@{'/products'(page=${products.number - 1},size=${products.size})}" th:if="${products.hasPrevious()}">Previous</a>
+        <span th:text="${products.number + 1}"></span>/<span th:text="${products.totalPages}"></span>
+        <a th:href="@{'/products'(page=${products.number + 1},size=${products.size})}" th:if="${products.hasNext()}">Next</a>
+    </div>
+
 </div>
+
 </body>
 </html>
