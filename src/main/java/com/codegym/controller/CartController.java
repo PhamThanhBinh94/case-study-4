@@ -4,10 +4,7 @@ import com.codegym.model.Bill;
 import com.codegym.model.BillDetail;
 import com.codegym.model.Customer;
 import com.codegym.model.Item;
-import com.codegym.service.BillDetailService;
-import com.codegym.service.BillService;
-import com.codegym.service.CustomerService;
-import com.codegym.service.ProductService;
+import com.codegym.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -20,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@CrossOrigin
 @RequestMapping("/checkout")
 public class CartController {
     @Autowired
@@ -33,6 +31,9 @@ public class CartController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private SendEmailService sendEmailService;
 
     @GetMapping("")
     public ModelAndView index(HttpSession session){
@@ -109,12 +110,15 @@ public class CartController {
     @RequestMapping(value = "/order", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public void order(HttpSession session,@RequestBody Customer customer) {
+        System.out.println("check");
+        String mail_body = "";
         customerService.save(customer);
         Bill bill = new Bill();
         bill.setCustomerId(customer.getPhone());
         bill.setAddress(customer.getAddress());
         bill.setStatus("Waiting confirm!");
         billService.save(bill);
+        mail_body += customer.toString() + "\n" + bill.toString() + "\n";
         List<Item> cart = (List<Item>) session.getAttribute("cart");
         for (Item item : cart) {
             BillDetail billDetail = new BillDetail();
@@ -122,7 +126,11 @@ public class CartController {
             billDetail.setUnit_price(item.getProduct().getPrice());
             billDetail.setProductId(item.getProduct().getId());
             billDetail.setAmount(item.getQuantity());
+            mail_body += billDetail.toString();
             billDetailService.save(billDetail);
         }
+        String topic = "Xác nhận đơn hàng";
+        System.out.println("Sending email");
+        sendEmailService.sendEmail(customer.getEmail(), mail_body,topic);
     }
 }
