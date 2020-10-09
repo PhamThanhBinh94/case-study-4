@@ -73,7 +73,7 @@
                 <!-- SEARCH BAR -->
                 <div class="col-md-6">
                     <div class="header-search">
-                        <form>
+                        <form th:action="@{/products/search}" method="get">
                             <select class="input-select">
                                 <option value="0">Sản phẩm</option>
                                 <option value="1">Tivi</option>
@@ -81,6 +81,7 @@
                                 <option value="1">Điều hòa</option>
                                 <option value="1">Máy giặt</option>
                             </select>
+
                             <input class="input" placeholder="Tìm kiếm">
                             <button class="search-btn">Tìm</button>
                         </form>

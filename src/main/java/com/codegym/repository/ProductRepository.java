@@ -1,5 +1,6 @@
 package com.codegym.repository;
 
+import com.codegym.model.Customer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
@@ -18,4 +19,5 @@ public interface ProductRepository extends PagingAndSortingRepository<Product, S
 
     Page<Product> findAllByType(String type,Pageable pageable);
 
+    Page<Product> findByNameContaining(String q, Pageable pageable);
 }

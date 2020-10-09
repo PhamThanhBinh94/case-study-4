@@ -1,5 +1,6 @@
 package com.codegym.controller;
 
+import com.codegym.model.Customer;
 import com.codegym.model.Product;
 import com.codegym.model.ProductDetails;
 import com.codegym.service.ProductDetailsService;
@@ -88,4 +89,32 @@ public class ProductController {
         modelAndView.addObject("details",details);
         return modelAndView;
     }
+
+    @GetMapping("/search")
+    public ModelAndView listCustomers(@RequestParam("s") Optional<String> s, Pageable pageable){
+        Page<Product> products;
+        if(s.isPresent()){
+            products = productService.findByNameContaining(s.get(), pageable);
+        } else {
+            products = productService.findAll(pageable);
+        }
+        ModelAndView modelAndView = new ModelAndView("/main/blank");
+        modelAndView.addObject("products", products);
+        return modelAndView;
+    }
+
+//    public ModelAndView listProduct(Optional<String> s, Pageable pageable) {
+//        Page<Product> products;
+//        System.out.println("s: " + s);
+//        System.out.println(s.isPresent());
+//        if (s.isPresent()){
+//            products = productService.findAllByTypeOrIdOrOrBrand(s.get(),s.get(),s.get(),pageable);
+//        }else {
+//            products = productService.findAll(pageable);
+//        }
+//        ModelAndView modelAndView = new ModelAndView("/main/blank");
+//        modelAndView.addObject("products", products);
+//        modelAndView.addObject("keyword",s.orElse(null));
+//        return modelAndView;
+//    }
 }
