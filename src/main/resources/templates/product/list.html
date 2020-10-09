@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>List Products</title>
@@ -13,7 +15,9 @@
 <div class="container-fluid">
     <header class="container-fluid">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">ADMIN</a>
+            <div sec:authorize="isAuthenticated()">
+                <a class="navbar-brand" href="/products/"><span sec:authentication="principal.username"></span></a>
+            </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -24,6 +28,7 @@
                         <a class="navbar-brand" href="http://localhost:8080/products">Sản phẩm<span class="sr-only">(current)</span></a>
                         <a class="navbar-brand" href="http://localhost:8080/customers">Khách hàng <span class="sr-only">(current)</span></a>
                         <a class="navbar-brand" href="http://localhost:8080/bill">Hóa đơn<span class="sr-only">(current)</span></a>
+                        <a class="navbar-brand" href="http://localhost:8080/logout">Đăng xuất<span class="sr-only">(current)</span></a>
                     </li>
 <!--                    <li class="nav-item">-->
 <!--                        <a class="nav-link" href="#">Link</a>-->
@@ -45,12 +50,17 @@
 <!--                    <li class="nav-item"><a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>-->
 <!--                    </li>-->
                 </ul>
+                <div >
                     <form class="form-inline my-2 my-lg-0">
                         <input class="form-control mr-sm-2" name="s" type="text" th:value="${keyword}" placeholder="Id, Brand, Type">
                         <button  class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm sản phẩm</button>
                     </form>
+                </div>
             </div>
-            <a href="/products/create" class="btn btn-success" role="button" style="float: right">Create new product</a>
+            <div >
+                <a href="/products/create" class="btn btn-success" role="button" style="float: right">Create new product</a>
+            </div>
+
         </nav>
     </header>
 </div>
