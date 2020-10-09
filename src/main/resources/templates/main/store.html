@@ -459,7 +459,7 @@
                                 </div>
                                 <div class="product-body">
                                     <p class="product-category" th:text="${product.brand}"></p>
-                                    <h3 class="product-name"><a href="#" th:text="${product.name}"></a></h3>
+                                    <h3 class="product-name"><a th:href="@{/chi-tiet/__${product.id}__}" th:text="${product.name}"></a></h3>
                                     <h4 class="product-price" th:text="${#numbers.formatDecimal(product.price,3,'POINT',0,'COMMA')}"><del class="product-old-price" th:text="${#numbers.formatDecimal(product.price,3,'POINT',0,'COMMA')}"></del></h4>
                                     <div class="product-rating">
                                         <i class="fa fa-star"></i>
