@@ -10,9 +10,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class HomeController {
@@ -62,6 +65,19 @@ public class HomeController {
         } else {
             modelAndView = new ModelAndView("main/blank");
         }
+        return modelAndView;
+    }
+
+    @PostMapping("/search")
+    public ModelAndView listCustomers(@RequestParam("s") Optional<String> s, Pageable pageable){
+        Page<Product> products;
+        if(s.isPresent()){
+            products = productService.findByNameContaining(s.get(), pageable);
+        } else {
+            products = productService.findAll(pageable);
+        }
+        ModelAndView modelAndView = new ModelAndView("/main/blank");
+        modelAndView.addObject("products", products);
         return modelAndView;
     }
 }
