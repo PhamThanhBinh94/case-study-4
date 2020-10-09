@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -34,8 +36,12 @@ public class CustomerController {
         return modelAndView;
     }
 
-    @PostMapping("/create")
-    public ModelAndView saveCustomer(@ModelAttribute("customer") Customer customer){
+    @PostMapping(value = "/create")
+    public ModelAndView saveCustomer(@Validated @ModelAttribute("customer") Customer customer, BindingResult bindingResult){
+        if(bindingResult.hasFieldErrors()){
+            ModelAndView modelAndView = new ModelAndView("/customer/create");
+            return modelAndView;
+        }
         customerService.save(customer);
         ModelAndView modelAndView = new ModelAndView("/customer/create");
         modelAndView.addObject("customer", new Customer());
@@ -51,7 +57,11 @@ public class CustomerController {
     }
 
     @PostMapping("/edit")
-    public ModelAndView updateCustomer(@ModelAttribute("customer") Customer customer){
+    public ModelAndView updateCustomer(@Validated @ModelAttribute("customer") Customer customer, BindingResult bindingResult){
+        if (bindingResult.hasFieldErrors()){
+            ModelAndView modelAndView = new ModelAndView("customer/edit");
+            return modelAndView;
+        }
         customerService.save(customer);
         ModelAndView modelAndView = new ModelAndView("customer/edit");
         modelAndView.addObject("customer", customer);

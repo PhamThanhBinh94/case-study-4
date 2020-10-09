@@ -3,22 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit customer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-<th:block th:if="${message}">
-    <p th:text="${message}"></p>
-</th:block>
-<a th:href="@{/customers}">List customer</a>
-<form action="#"  th:action="@{/customers/edit}" th:object="${customer}" method="post">
-    <label>Phone: </label><br>
-    <input type="text" th:field="*{phone}"/><br>
-    <label>Name: </label><br>
-    <input type="text" th:field="*{name}"/><br>
-    <label>Email: </label><br>
-    <input type="text" th:field="*{email}"/><br>
-    <label>Address: </label><br>
-    <input type="text" th:field="*{address}"/><br>
-    <button type="submit">Save</button>
-</form>
+<div class="container-full">
+    <header class="container-full   ">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">ADMIN</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="navbar-brand" href="http://localhost:8080/products">Sản phẩm<span class="sr-only">(current)</span></a>
+                        <a class="navbar-brand" href="http://localhost:8080/customers">Khách hàng <span class="sr-only">(current)</span></a>
+                        <a class="navbar-brand" href="http://localhost:8080/bill">Hóa đơn<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item dropdown ">
+                        <a class="nav-link dropdown-toggle navbar-brand" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Sản phẩm
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/products">Toàn bộ sản phẩm</a>
+                            <a class="dropdown-item" href="/products?type=tivi">Tivi</a>
+                            <a class="dropdown-item" href="/products?type=tu-lanh">Tủ lạnh</a>
+                            <a class="dropdown-item" href="/products?type=dieu-hoa-nhiet-do">Điều hòa</a>
+                            <a class="dropdown-item" href="/products?type=may-giat">Máy giặt</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Khác</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <a href="/customers/" class="btn btn-success" role="button" style="float: right">Come back</a>
+        </nav>
+    </header>
+</div>
+<!--<th:block th:if="${message}">-->
+<!--    <p th:text="${message}"></p>-->
+<!--</th:block>-->
+<!--<a th:href="@{/customers}">List customer</a>-->
+
+
+<div class="col-md-8 order-md-1">
+    <form class="needs-validation" action="#"  th:action="@{/customers/edit}" th:object="${customer}" method="post">
+
+        <div class="mb-3">
+            <label>Phone: </label><br>
+            <input type="text" th:field="*{phone}" class="form-control"/><br>
+            <p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Phone Error</p>
+        </div>
+
+
+       <div class="mb-3">
+           <label>Name: </label><br>
+           <input type="text" th:field="*{name}" class="form-control"/><br>
+           <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</p>
+       </div>
+
+
+        <div class="mb-3">
+            <label>Email: </label><br>
+            <input type="text" th:field="*{email}" class="form-control"/><br>
+            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</p>
+        </div>
+
+
+        <div class="mb-3">
+            <label>Address: </label><br>
+            <input type="text" th:field="*{address}" class="form-control"/><br>
+            <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Address Error</p>
+        </div>
+
+
+        <button type="submit" class="btn btn-success btn-lg btn-primary">Save</button>
+    </form>
+</div>
+
 </body>
 </html>
