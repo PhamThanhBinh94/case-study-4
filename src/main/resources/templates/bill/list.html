@@ -15,10 +15,10 @@
     </style>
 </head>
 <body>
-<div class="container-fluid">
-    <header class="container-fluid">
+<div class="container-full">
+    <header class="container-full">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">ADMIN</a>
+<!--            <a class="navbar-brand" href="#">ADMIN</a>-->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -67,7 +67,7 @@
     <tr class="thead-dark " >
 
         <th>Bill ID</th>
-        <th>Customer ID</th>
+        <th>Phone</th>
         <th>Create Date</th>
         <th>Address</th>
         <th>Status</th>
@@ -83,8 +83,8 @@
                 <td th:text="${bill.getAddress()}" ></td>
                 <td th:text="${bill.getStatus()}"> </td>
 <!--                <td th:text="${totals.get(bills.indexOf(bill))}"></td>-->
-                <td><a th:href="@{/bill/view/__${bill.billId}__}">View</a></td>
-                <td><a th:href="@{/bill/edit/__${bill.billId}__}">Edit</a></td>
+                <td><a th:href="@{/bill/view/__${bill.billId}__}" class="btn btn-success" role="button">View</a></td>
+                <td><a th:href="@{/bill/edit/__${bill.billId}__}" class="btn btn-success" role="button">Edit</a></td>
             </tr>
         </th:block>
 </table>
