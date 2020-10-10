@@ -26,4 +26,6 @@ public interface ProductService {
 
 //    List<Product> findAllByTypeOrIdOrOrBrand(String type,String id,String brand);
 
+    List<Product> filterProduct(int LowestPrice, int HighestPrice, String brand);
+
 }

@@ -4,7 +4,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.util.List;
 
 @Entity
 @Table(name = "product")
@@ -21,4 +20,6 @@ public class Product {
     public String image;
     public int amount;
 
+    public Product() {
+    }
 }

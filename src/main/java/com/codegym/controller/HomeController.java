@@ -64,4 +64,15 @@ public class HomeController {
         }
         return modelAndView;
     }
+
+    @GetMapping("/filter")
+    public ModelAndView filter(){
+        List<Product> productList = productService.filterProduct(10000000,15000000,"samsung");
+        for (Product product : productList){
+            System.out.println(product);
+        }
+        ModelAndView modelAndView = new ModelAndView("main/store");
+        modelAndView.addObject("products", productList);
+        return modelAndView;
+    }
 }
