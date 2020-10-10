@@ -18,7 +18,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public Page<Review> findAllByProductId(String id, Pageable pageable) {
-        return reviewRepository.findAllByProductId(id, pageable);
+        return reviewRepository.findAllByProductIdOrderByDateDesc(id, pageable);
     }
 
     @Override

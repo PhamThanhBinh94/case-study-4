@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${product.id}"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<table class="table" border="1">
+    <tr>
+        <th>ID:</th>
+        <td th:text="${product.id}"></td>
+        <td rowspan="6"><img  th:src="${product.image}"></td>
+    </tr>
+    <tr>
+        <th>Type:</th>
+        <td th:text="${product.type}"></td>
+    </tr>
+    <tr>
+        <th>Name:</th>
+        <td th:text="${product.name}"></td>
+    </tr>
+    <tr>
+        <th>Brand:</th>
+        <td th:text="${product.brand}"></td>
+    </tr>
+    <tr>
+        <th>Price:</th>
+        <td th:text="${product.price}"></td>
+    </tr>
+    <tr>
+        <th>Amount:</th>
+        <td th:text="${product.amount}"></td>
+    </tr>
+</table>
+
+<br/>
+<input type="hidden" id="feature" th:value="${details.feature}">
+<input type="hidden" id="technology" th:value="${details.technology}">
+<input type="hidden" id="general" th:value="${details.generalInfo}">
+<div id="details_table">
+
+</div>
+
+
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function (){
+        let feature = $('#feature').val();
+        let technology = $('#technology').val();
+        console.log(technology);
+        let general = $('#general').val();
+        console.log(feature.replaceAll('__ <info>','</td></tr><tr><td>').replace('<info>','<tr><td>').replaceAll('__ ','</td><td>').replace('__','</td></tr>'));
+        feature = feature.replaceAll('__ <info>','</td></tr><tr><td>').replace('<info>','<tr><td>').replaceAll('__ ','</td><td>').replace('__','</td></tr>');
+        general = general.replaceAll('__ <info>','</td></tr><tr><td>').replace('<info>','<tr><td>').replaceAll('__ ','</td><td>').replace('__','</td></tr>').replace('<td> <info>','<tr><td>');
+        let render_table = '<table class="table" border="1">\n' +
+            '    <tr style="background-color: #1e1f29; color: ghostwhite;">\n' +
+            '        <th colspan="2">Feature:</th>\n' +
+            '    </tr>\n' + feature +
+            '\n';
+        if (technology != ''){
+            technology = technology.replaceAll('__ <info>','</td></tr><tr><td>').replace('<info>','<tr><td>').replaceAll('__ ','</td><td>').replace('__','</td></tr>').replace('<td> <info>','<tr><td>');
+            render_table += '    <tr style="background-color: #1e1f29; color: ghostwhite;">\n' +
+                '        <th colspan="2">Technology:</th>\n' +
+                '    </tr>\n' + technology +
+                '\n';
+        }
+        console.log(feature);
+        console.log(technology);
+        console.log(general);
+        render_table += '    <tr style="background-color: #1e1f29; color: ghostwhite;">\n' +
+            '        <th colspan="2">General Info:</th>\n' +
+            '    </tr>\n' + general +
+            '\n' +
+            '</table>';
+
+        $('#details_table').html(render_table);
+    });
+</script>
+</body>
+</html>

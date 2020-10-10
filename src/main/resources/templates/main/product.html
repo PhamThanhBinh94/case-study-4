@@ -42,13 +42,13 @@
     <div id="top-header">
         <div class="container">
             <ul class="header-links pull-left">
-                <li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
-                <li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
-                <li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
+                <li><a href="#"><i class="fa fa-phone"></i>+84-855000710</a></li>
+                <li><a href="#"><i class="fa fa-envelope-o"></i> electro@gmail.com</a></li>
+                <li><a href="#"><i class="fa fa-map-marker"></i> 276 Đại Từ, Hoàng Mai, Hà Nội</a></li>
             </ul>
             <ul class="header-links pull-right">
                 <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-                <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+                <li><a href="#"><i class="fa fa-user-o"></i> Tài khoản của tôi</a></li>
             </ul>
         </div>
     </div>
@@ -73,14 +73,16 @@
                 <!-- SEARCH BAR -->
                 <div class="col-md-6">
                     <div class="header-search">
-                        <form>
+                        <form th:action="@{/search}" method="post">
                             <select class="input-select">
-                                <option value="0">All Categories</option>
-                                <option value="1">Category 01</option>
-                                <option value="1">Category 02</option>
+                                <option value="0">Sản phẩm</option>
+                                <option value="1">Tivi</option>
+                                <option value="1">Tủ lạnh</option>
+                                <option value="1">Điều hòa</option>
+                                <option value="1">Máy giặt</option>
                             </select>
-                            <input class="input" placeholder="Search here">
-                            <button class="search-btn">Search</button>
+                            <input class="input" placeholder="Tìm kiếm" name="s">
+                            <button class="search-btn">Tìm</button>
                         </form>
                     </div>
                 </div>
@@ -93,7 +95,7 @@
                         <div>
                             <a href="#">
                                 <i class="fa fa-heart-o"></i>
-                                <span>Your Wishlist</span>
+                                <span>Yêu thích</span>
                                 <div class="qty">2</div>
                             </a>
                         </div>
@@ -103,7 +105,7 @@
                         <div class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                 <i class="fa fa-shopping-cart"></i>
-                                <span>Your Cart</span>
+                                <span>Giỏ hàng</span>
                                 <div class="qty">3</div>
                             </a>
                             <div class="cart-dropdown">
@@ -170,13 +172,13 @@
         <div id="responsive-nav">
             <!-- NAV -->
             <ul class="main-nav nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Hot Deals</a></li>
-                <li><a href="#">Categories</a></li>
-                <li><a href="#">Laptops</a></li>
-                <li><a href="#">Smartphones</a></li>
-                <li><a href="#">Cameras</a></li>
-                <li><a href="#">Accessories</a></li>
+                <li class="active"><a th:href="@{/}">Trang chủ</a></li>
+                <li><a th:href="@{/tivi}">Tivi</a></li>
+                <li><a th:href="@{/tu-lanh}">Tủ lạnh</a></li>
+                <li><a th:href="@{/dieu-hoa-nhiet-do}">Điều hòa</a></li>
+                <li><a th:href="@{/may-giat}">Máy giặt</a></li>
+                <li><a th:href="@{#}">Lò vi sóng</a></li>
+                <li><a th:href="@{#}">Bình nóng lạnh</a></li>
             </ul>
             <!-- /NAV -->
         </div>
@@ -302,7 +304,7 @@
                                 <span class="qty-down">-</span>
                             </div>
                         </div>
-                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                        <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i><a th:href="@{/checkout/buy/__${product.id}__}">add to cart</a></button>
                     </div>
 
                     <ul class="product-btns">
@@ -345,7 +347,10 @@
                         <div id="tab1" class="tab-pane fade in active">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                    <input type="hidden" id="feature" th:value="${details.feature}">
+                                    <input type="hidden" id="technology" th:value="${details.technology}">
+                                    <input type="hidden" id="general" th:value="${details.generalInfo}">
+                                    <div id="details_table"></div>
                                 </div>
                             </div>
                         </div>
@@ -738,9 +743,9 @@
                         <h3 class="footer-title">About Us</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
                         <ul class="footer-links">
-                            <li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
-                            <li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
-                            <li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
+                            <li><a href="#"><i class="fa fa-phone"></i>+84-855000710</a></li>
+                            <li><a href="#"><i class="fa fa-envelope-o"></i> electro@gmail.com</a></li>
+                            <li><a href="#"><i class="fa fa-map-marker"></i> 276 Đại Từ, Hoàng Mai, Hà Nội</a></li>
                         </ul>
                     </div>
                 </div>
@@ -831,6 +836,8 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function (){
+        getDetailsOfProduct();
+
         let product = $('#product_id').val();
 
         getListReviews(product);
@@ -908,10 +915,16 @@
                 $('#percent_of_4').attr('style', 'width: ' + percent_of_4 + '%');
                 $('#percent_of_5').attr('style', 'width: ' + percent_of_5 + '%');
                 let average_of_rate = 0;
-                for (let i=0; i < data.length; i++){
-                    average_of_rate += (i+1)*data[i]/number_of_rates;
+                if(number_of_rates > 0){
+                    for (let i=0; i < data.length; i++){
+                        average_of_rate += (i+1)*data[i]/number_of_rates;
+                    }
+                    $('#average_rating').html(average_of_rate.toFixed(1));
+                } else {
+                    $('#average_rating').html('0');
                 }
-                $('#average_rating').html(average_of_rate.toFixed(1));
+
+
                 let render_rating_star = "";
                 for (let i=0; i < Math.round(average_of_rate); i++){
                     render_rating_star += '<i class="fa fa-star"></i> ';
@@ -963,6 +976,38 @@
                 $('.reviews').html(review);
             }
         });
+    }
+
+    function getDetailsOfProduct() {
+        let feature = $('#feature').val();
+        let technology = $('#technology').val();
+        console.log(technology);
+        let general = $('#general').val();
+        console.log(feature.replaceAll('__ <info>', '</td></tr><tr><td>').replace('<info>', '<tr><td>').replaceAll('__ ', '</td><td>').replace('__', '</td></tr>'));
+        feature = feature.replaceAll('__ <info>', '</td></tr><tr><td>').replace('<info>', '<tr><td>').replaceAll('__ ', '</td><td>').replace('__', '</td></tr>');
+        general = general.replaceAll('__ <info>', '</td></tr><tr><td>').replace('<info>', '<tr><td>').replaceAll('__ ', '</td><td>').replace('__', '</td></tr>').replace('<td> <info>', '<tr><td>');
+        let render_table = '<table class="table" border="1">\n' +
+            '    <tr style="background-color: #1e1f29; color: ghostwhite;">\n' +
+            '        <th colspan="2">Feature:</th>\n' +
+            '    </tr>\n' + feature +
+            '\n';
+        if (technology != '') {
+            technology = technology.replaceAll('__ <info>', '</td></tr><tr><td>').replace('<info>', '<tr><td>').replaceAll('__ ', '</td><td>').replace('__', '</td></tr>').replace('<td> <info>', '<tr><td>');
+            render_table += '    <tr style="background-color: #1e1f29; color: ghostwhite;">\n' +
+                '        <th colspan="2">Technology:</th>\n' +
+                '    </tr>\n' + technology +
+                '\n';
+        }
+        console.log(feature);
+        console.log(technology);
+        console.log(general);
+        render_table += '    <tr style="background-color: #1e1f29; color: ghostwhite;">\n' +
+            '        <th colspan="2">General Info:</th>\n' +
+            '    </tr>\n' + general +
+            '\n' +
+            '</table>';
+
+        $('#details_table').html(render_table);
     }
 </script>
 </body>

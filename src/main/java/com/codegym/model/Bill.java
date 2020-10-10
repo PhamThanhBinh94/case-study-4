@@ -14,11 +14,10 @@ import java.util.List;
 public class Bill {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="bill_id")
     private Long billId;
 
-    @Column(name="customer_id")
     private String customerId;
 
     @Temporal(TemporalType.TIMESTAMP)

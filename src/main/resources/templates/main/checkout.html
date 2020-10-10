@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
+    <meta name="_csrf" content="${_csrf.token}"/>
+    <meta name="_csrf_header" content="${_csrf.headerName}"/>
     <title>Electro - HTML Ecommerce Template</title>
 
     <!-- Google font -->
@@ -43,13 +44,13 @@
     <div id="top-header">
         <div class="container">
             <ul class="header-links pull-left">
-                <li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
-                <li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
-                <li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
+                <li><a href="#"><i class="fa fa-phone"></i>+84-855000710</a></li>
+                <li><a href="#"><i class="fa fa-envelope-o"></i>electro@gmail.com</a></li>
+                <li><a href="#"><i class="fa fa-map-marker"></i>276 Đại Từ, Hoàng Mai, Hà Nội</a></li>
             </ul>
             <ul class="header-links pull-right">
                 <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-                <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+                <li><a href="#"><i class="fa fa-user-o"></i>Tài khoản của tôi</a></li>
             </ul>
         </div>
     </div>
@@ -74,14 +75,16 @@
                 <!-- SEARCH BAR -->
                 <div class="col-md-6">
                     <div class="header-search">
-                        <form>
+                        <form th:action="@{/search}" method="post">
                             <select class="input-select">
-                                <option value="0">All Categories</option>
-                                <option value="1">Category 01</option>
-                                <option value="1">Category 02</option>
+                                <option value="0">Sản phẩm</option>
+                                <option value="1">Tivi</option>
+                                <option value="1">Tủ lạnh</option>
+                                <option value="1">Điều hòa</option>
+                                <option value="1">Máy giặt</option>
                             </select>
-                            <input class="input" placeholder="Search here">
-                            <button class="search-btn">Search</button>
+                            <input class="input" placeholder="Tìm kiếm" name="s">
+                            <button class="search-btn">Tìm</button>
                         </form>
                     </div>
                 </div>
@@ -94,7 +97,7 @@
                         <div>
                             <a href="#">
                                 <i class="fa fa-heart-o"></i>
-                                <span>Your Wishlist</span>
+                                <span>Yêu thích</span>
                                 <div class="qty">2</div>
                             </a>
                         </div>
@@ -104,7 +107,7 @@
                         <div class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                 <i class="fa fa-shopping-cart"></i>
-                                <span>Your Cart</span>
+                                <span>Giỏ hàng</span>
                                 <div class="qty">3</div>
                             </a>
                             <div class="cart-dropdown">
@@ -165,13 +168,13 @@
         <div id="responsive-nav">
             <!-- NAV -->
             <ul class="main-nav nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Hot Deals</a></li>
-                <li><a href="#">Categories</a></li>
-                <li><a href="#">Laptops</a></li>
-                <li><a href="#">Smartphones</a></li>
-                <li><a href="#">Cameras</a></li>
-                <li><a href="#">Accessories</a></li>
+                <li class="active"><a th:href="@{/}">Trang chủ</a></li>
+                <li><a th:href="@{/tivi}">Tivi</a></li>
+                <li><a th:href="@{/tu-lanh}">Tủ lạnh</a></li>
+                <li><a th:href="@{/dieu-hoa-nhiet-do}">Điều hòa</a></li>
+                <li><a th:href="@{/may-giat}">Máy giặt</a></li>
+                <li><a th:href="@{#}">Lò vi sóng</a></li>
+                <li><a th:href="@{#}">Bình nóng lạnh</a></li>
             </ul>
             <!-- /NAV -->
         </div>
@@ -207,24 +210,31 @@
     <div class="container">
         <!-- row -->
         <div class="row">
+
             <div class="col-md-7">
                 <!-- Billing Details -->
                 <div class="billing-details">
                     <div class="section-title">
                         <h3 class="title">Billing address</h3>
                     </div>
-
                     <div class="form-group">
                         <input id="customerName" class="input" type="text" name="first-name" placeholder="Name">
                     </div>
-
+<!--                    <div class="form-group">-->
+<!--                        <input class="input" type="text" name="last-name" placeholder="Last Name">-->
+<!--                    </div>-->
                     <div class="form-group">
                         <input id="customerEmail" class="input" type="email" name="email" placeholder="email@gmail.com">
                     </div>
                     <div class="form-group">
                         <input id="customerAddress" class="input" type="text" name="address" placeholder="Address">
                     </div>
-
+<!--                    <div class="form-group">-->
+<!--                        <input class="input" type="text" name="city" placeholder="City">-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <input class="input" type="text" name="country" placeholder="Country">-->
+<!--                    </div>-->
                     <div class="form-group">
                         <input class="input" type="text" name="zip-code" placeholder="ZIP Code">
                     </div>
@@ -247,13 +257,54 @@
                         </div>
                     </div>
                 </div>
+                <!-- /Billing Details -->
+
+<!--                &lt;!&ndash; Shiping Details &ndash;&gt;-->
+<!--                <div class="shiping-details">-->
+<!--                    <div class="section-title">-->
+<!--                        <h3 class="title">Shiping address</h3>-->
+<!--                    </div>-->
+<!--                    <div class="input-checkbox">-->
+<!--                        <input type="checkbox" id="shiping-address">-->
+<!--                        <label for="shiping-address">-->
+<!--                            <span></span>-->
+<!--                            Ship to a diffrent address?-->
+<!--                        </label>-->
+<!--                        <div class="caption">-->
+<!--                            <div class="form-group">-->
+<!--                                <input class="input" type="text" name="first-name" placeholder="First Name">-->
+<!--                            </div>-->
+<!--                            <div class="form-group">-->
+<!--                                <input class="input" type="text" name="last-name" placeholder="Last Name">-->
+<!--                            </div>-->
+<!--                            <div class="form-group">-->
+<!--                                <input class="input" type="email" name="email" placeholder="Email">-->
+<!--                            </div>-->
+<!--                            <div class="form-group">-->
+<!--                                <input class="input" type="text" name="address" placeholder="Address">-->
+<!--                            </div>-->
+<!--                            <div class="form-group">-->
+<!--                                <input class="input" type="text" name="city" placeholder="City">-->
+<!--                            </div>-->
+<!--                            <div class="form-group">-->
+<!--                                <input class="input" type="text" name="country" placeholder="Country">-->
+<!--                            </div>-->
+<!--                            <div class="form-group">-->
+<!--                                <input class="input" type="text" name="zip-code" placeholder="ZIP Code">-->
+<!--                            </div>-->
+<!--                            <div class="form-group">-->
+<!--                                <input class="input" type="tel" name="tel" placeholder="Telephone">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                &lt;!&ndash; /Shiping Details &ndash;&gt;-->
+
                 <!-- Order notes -->
                 <div class="order-notes">
-                    <label>
-                        <textarea class="input" placeholder="Order Notes"></textarea>
-                    </label>
+                    <textarea class="input" placeholder="Order Notes"></textarea>
                 </div>
-               <!-- /Order notes -->
+                <!-- /Order notes -->
             </div>
 
             <!-- Order Details -->
@@ -263,37 +314,38 @@
                     <h3 class="title">Your Order</h3>
                 </div>
                 <form method="post" th:action="${'/checkout/update'}">
-                    <div class="order-summary">
-                        <div class="order-col">
-                            <div><strong>PRODUCT</strong></div>
-                            <div><strong>QUANTITY</strong></div>
-                            <div><strong>TOTAL</strong></div>
-                        </div>
-                        <div class="order-products">
-                            <th:block th:each="item : ${session.cart}">
-                                <div class="order-col">
-                                    <div><span th:text="${item.product.name}"></span></div>
-                                    <div><input type="number" th:value="${item.quantity}" name="quantity" style="width: 50px;"/><a th:href="${'/checkout/remove/' + item.product.id}">X</a></div>
-                                    </td>
-                                    <div><span th:text="${#numbers.formatDecimal(item.product.price * item.quantity,3,'POINT',0,'COMMA')}"></span></div>
-                                </div>
-                            </th:block>
-                        </div>
-                        <div class="order-col">
-                            <div>Shiping</div>
-                            <div><strong>FREE</strong></div>
-                        </div>
-                        <div><input type="submit" value="Update"></div>
-                        <div class="order-col">
-                            <div><strong>TOTAL</strong></div>
-                            <div><strong class="order-total"><span th:text="${#numbers.formatDecimal(total,3,'POINT',0,'COMMA')}"></span></strong></div>
-                        </div>
+                <div class="order-summary">
+                    <div class="order-col">
+                        <div><strong>PRODUCT</strong></div>
+                        <div><strong>QUANTITY</strong></div>
+                        <div><strong>TOTAL</strong></div>
                     </div>
+                    <div class="order-products">
+                        <th:block th:each="item : ${session.cart}">
+                            <div class="order-col">
+                                <div><span th:text="${item.product.name}"></span></div>
+                                <div><input type="number" th:value="${item.quantity}" name="quantity" style="width: 50px;"/><a th:href="${'/checkout/remove/' + item.product.id}">X</a></div>
+                            </td>
+                                <div><span th:text="${#numbers.formatDecimal(item.product.price * item.quantity,3,'POINT',0,'COMMA')}"></span></div>
+                            </div>
+                        </th:block>
+                    </div>
+                    <div class="order-col">
+                        <div>Shiping</div>
+                        <div><strong>FREE</strong></div>
+                    </div>
+                    <div><input type="submit" value="Update"></div>
+                    <div class="order-col">
+                        <div><strong>TOTAL</strong></div>
+                        <div><strong class="order-total"><span th:text="${#numbers.formatDecimal(total,3,'POINT',0,'COMMA')}"></span></strong></div>
+                    </div>
+                </div>
                 </form>
                 <div class="payment-method">
                     <div class="input-radio">
                         <input type="radio" name="payment" id="payment-1">
                         <label for="payment-1">
+                            <span></span>
                             Direct Bank Transfer
                         </label>
                         <div class="caption">
@@ -322,6 +374,7 @@
                 <div class="input-checkbox">
                     <input type="checkbox" id="terms">
                     <label for="terms">
+                        <span></span>
                         I've read and accept the <a href="#">terms & conditions</a>
                     </label>
                 </div>
@@ -384,9 +437,9 @@
                         <h3 class="footer-title">About Us</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
                         <ul class="footer-links">
-                            <li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
-                            <li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
-                            <li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
+                            <li><a href="#"><i class="fa fa-phone"></i> +84-855000710</a></li>
+                            <li><a href="#"><i class="fa fa-envelope-o"></i> electro@gmail.com</a></li>
+                            <li><a href="#"><i class="fa fa-map-marker"></i> 276 Đại Từ, Hoàng Mai, Hà Nội</a></li>
                         </ul>
                     </div>
                 </div>
@@ -438,8 +491,6 @@
     </div>
     <!-- /top footer -->
 
-
-
     <!-- bottom footer -->
     <div id="bottom-footer" class="section">
         <div class="container">
@@ -479,99 +530,34 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>
     function placeOrder(){
-            let name = $('#customerName').val();
-            let email = $('#customerEmail').val();
-            let phone = $('#customerPhone').val();
-            let address = $('#customerAddress').val();
-            let json = {
-                'name': name,
-                'email': email,
-                'phone': phone,
-                'address': address
+        let name = $('#customerName').val();
+        let email = $('#customerEmail').val();
+        let phone = $('#customerPhone').val();
+        let address = $('#customerAddress').val();
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+        let json = {
+            'name': name,
+            'email': email,
+            'phone': phone,
+            'address': address
+        }
+        console.log(json);
+        $.ajax({
+            headers:{
+                'Content-type': 'application/json'
+            },
+            type: "POST",
+            url: "/checkout/order",
+            data: JSON.stringify(json),
+            header: header,
+            token: token,
+            success:function (){
+                console.log('OK');
             }
-            $.ajax({
-                headers: {
-                    'Content-type': 'application/json'
-                },
-                type: "POST",
-                url: "/checkout/order",
-                data: JSON.stringify(json),
-                success: function () {
-                    console.log('OK');
-                }
-            })
+        })
     }
 </script>
-<!--<script>-->
-<!--    let name = document.getElementById('customerName');-->
-<!--    let email = document.getElementById('customerEmail');-->
-<!--    let address = document.getElementById('customerAddress');-->
-<!--    let phone = document.getElementById('customerPhone');-->
-
-<!--    function placeOrder() {-->
-<!--        checkInputs();-->
-<!--        savePlaceOrder();-->
-<!--    }-->
-
-<!--    function checkInputs() {-->
-<!--        let nameValue = name.value.trim();-->
-<!--        let emailValue = email.value.trim();-->
-<!--        let addressValue = address.value.trim();-->
-<!--        let phoneValue = phone.value.trim();-->
-
-<!--        if(nameValue == ''){-->
-<!--            setErrorFor(name, 'Fullname cannot be blank');-->
-<!--        } else if (!nameValue) {-->
-<!--            setErrorFor(nameValue, 'The full name does not contain special characters')-->
-<!--        } else {-->
-<!--            setSuccessFor(name);-->
-<!--        }-->
-
-<!--        if(emailValue == ""){-->
-<!--            setErrorFor(email, 'Email cannot be bank')-->
-<!--        } else if(!isEmail(emailValue)){-->
-<!--            setErrorFor(email, 'Email cannot valid')-->
-<!--        } else {-->
-<!--            setSuccessFor(email);-->
-<!--        }-->
-
-<!--        if(addressValue   == ''){-->
-<!--            setErrorFor(address, 'Address cannot be blank');-->
-<!--        } else {-->
-<!--            setSuccessFor(address);-->
-<!--        }-->
-
-<!--        if(phoneValue == ''){-->
-<!--            setErrorFor(phone, 'Phone cannot be blank');-->
-<!--        } else if (!isphone(phoneValue)) {-->
-<!--            setErrorFor(phone, 'Re-enter phone number');-->
-<!--        }else {-->
-<!--            setSuccessFor(phone);-->
-<!--        }-->
-<!--    }-->
-
-<!--    function setErrorFor(input, message) {-->
-<!--        let formGroup = input.parentElement;-->
-<!--        let small = formGroup.querySelector('small');-->
-<!--        small.innerText = message;-->
-<!--        formGroup.className = 'form-group error';-->
-<!--    }-->
-
-<!--    function setSuccessFor(input) {-->
-<!--        let formGroup = input.parentElement;-->
-<!--        formGroup.className = 'form-group success';-->
-<!--    }-->
-
-<!--    function isEmail(email) {-->
-<!--        return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email);-->
-<!--    }-->
-
-<!--    function isphone(phone) {-->
-<!--        return /^[0][6789][0-9]{8}$/.test(phone);-->
-<!--    }
-</script>
--->
-
 
 </body>
 </html>

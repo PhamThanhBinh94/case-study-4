@@ -1,6 +1,9 @@
 package com.codegym.controller;
 
+import com.codegym.model.Customer;
 import com.codegym.model.Product;
+import com.codegym.model.ProductDetails;
+import com.codegym.service.ProductDetailsService;
 import com.codegym.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,6 +24,9 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private ProductDetailsService detailsService;
 
     @GetMapping("")
     public ModelAndView listProducts(Optional<String> s, Pageable pageable) {
@@ -83,4 +89,17 @@ public class ProductController {
         ModelAndView modelAndView = new ModelAndView("redirect:/products");
         return modelAndView;
     }
+
+    @GetMapping("/view/{id}")
+    public ModelAndView viewProduct(@PathVariable String id){
+        ModelAndView modelAndView = new ModelAndView("product/view");
+        Product product = productService.findById(id);
+        ProductDetails details = detailsService.findDetailById(id);
+        modelAndView.addObject("product",product);
+        modelAndView.addObject("details",details);
+        return modelAndView;
+    }
+
+
+
 }
