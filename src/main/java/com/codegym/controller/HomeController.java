@@ -1,5 +1,6 @@
 package com.codegym.controller;
 
+import com.codegym.model.Item;
 import com.codegym.model.Product;
 import com.codegym.model.ProductDetails;
 import com.codegym.service.ProductDetailsService;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

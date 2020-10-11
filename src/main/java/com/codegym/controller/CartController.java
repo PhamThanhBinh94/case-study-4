@@ -42,6 +42,7 @@ public class CartController {
         return modelAndView;
     }
 
+
     @RequestMapping(value = "/buy/{id}", method = RequestMethod.GET)
     public String index(@PathVariable("id") String id, HttpSession session){
         if (session.getAttribute("cart") == null){
@@ -62,6 +63,7 @@ public class CartController {
         }
         return "redirect:/checkout";
     }
+
 
     @RequestMapping(value = "/remove/{id}", method = RequestMethod.GET)
     public String remove(@PathVariable("id") String id, HttpSession session) {
@@ -106,7 +108,6 @@ public class CartController {
     @RequestMapping(value = "/order", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public void order(HttpSession session,@RequestBody Customer customer) {
-        System.out.println("check");
         String mail_body = "";
         customerService.save(customer);
         Bill bill = new Bill();
