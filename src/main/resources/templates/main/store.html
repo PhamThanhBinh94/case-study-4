@@ -167,6 +167,7 @@
         <!-- container -->
     </div>
     <!-- /MAIN HEADER -->
+    </div>
 </header>
 <!-- /HEADER -->
 
@@ -223,6 +224,7 @@
         <div class="row">
             <!-- ASIDE -->
             <div id="aside" class="col-md-3">
+                <form id="product_filter" th:action="@{/filter}" method="post" th:object="${filter}">
                 <!-- aside Widget -->
                 <div class="aside">
                     <h3 class="aside-title">Categories</h3>
@@ -287,19 +289,19 @@
 
                 <!-- aside Widget -->
                 <div class="aside">
-                    <h3 class="aside-title">Price</h3>
+                    <h3 class="aside-title">Price (VND)</h3>
                     <div class="price-filter">
                         <div id="price-slider"></div>
                         <div class="input-number price-min">
-                            <input id="price-min" type="number">
-                            <span class="qty-up">+</span>
-                            <span class="qty-down">-</span>
+                            <input id="price-min" type="number" th:field="*{minPrice}">
+<!--                            <span class="qty-up">+</span>-->
+<!--                            <span class="qty-down">-</span>-->
                         </div>
                         <span>-</span>
                         <div class="input-number price-max">
-                            <input id="price-max" type="number">
-                            <span class="qty-up">+</span>
-                            <span class="qty-down">-</span>
+                            <input id="price-max" type="number" th:field="*{maxPrice}">
+<!--                            <span class="qty-up">+</span>-->
+<!--                            <span class="qty-down">-</span>-->
                         </div>
                     </div>
                 </div>
@@ -310,7 +312,7 @@
                     <h3 class="aside-title">Brand</h3>
                     <div class="checkbox-filter">
                         <div class="input-checkbox">
-                            <input type="checkbox" id="brand-1">
+                            <input type="checkbox" id="brand-1" class="brand_filter" th:field="*{brands}" th:value="samsung">
                             <label for="brand-1">
                                 <span></span>
                                 SAMSUNG
@@ -318,7 +320,7 @@
                             </label>
                         </div>
                         <div class="input-checkbox">
-                            <input type="checkbox" id="brand-2">
+                            <input type="checkbox" id="brand-2" class="brand_filter" th:field="*{brands}" th:value="lg">
                             <label for="brand-2">
                                 <span></span>
                                 LG
@@ -326,7 +328,7 @@
                             </label>
                         </div>
                         <div class="input-checkbox">
-                            <input type="checkbox" id="brand-3">
+                            <input type="checkbox" id="brand-3" class="brand_filter" th:field="*{brands}" th:value="sony">
                             <label for="brand-3">
                                 <span></span>
                                 SONY
@@ -334,32 +336,42 @@
                             </label>
                         </div>
                         <div class="input-checkbox">
-                            <input type="checkbox" id="brand-4">
+                            <input type="checkbox" id="brand-4" class="brand_filter" th:field="*{brands}" th:value="panasonic">
                             <label for="brand-4">
                                 <span></span>
-                                SAMSUNG
+                                PANASONIC
                                 <small>(578)</small>
                             </label>
                         </div>
                         <div class="input-checkbox">
-                            <input type="checkbox" id="brand-5">
+                            <input type="checkbox" id="brand-5" class="brand_filter" th:field="*{brands}" th:value="aqua">
                             <label for="brand-5">
                                 <span></span>
-                                LG
+                                AQUA
                                 <small>(125)</small>
                             </label>
                         </div>
                         <div class="input-checkbox">
-                            <input type="checkbox" id="brand-6">
+                            <input type="checkbox" id="brand-6" class="brand_filter" th:field="*{brands}" th:value="electrolux">
                             <label for="brand-6">
                                 <span></span>
-                                SONY
+                                ELECTROLUX
+                                <small>(755)</small>
+                            </label>
+                        </div>
+                        <div class="input-checkbox">
+                            <input type="checkbox" id="brand-7" class="brand_filter" th:field="*{brands}" th:value="sharp">
+                            <label for="brand-7">
+                                <span></span>
+                                SHARP
                                 <small>(755)</small>
                             </label>
                         </div>
                     </div>
                 </div>
                 <!-- /aside Widget -->
+                    <button type="submit">Lọc sản phẩm</button>
+                </form>
 
                 <!-- aside Widget -->
                 <div class="aside">
@@ -644,6 +656,45 @@
 <script type="text/javascript" th:src="@{/js/nouislider.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/jquery.zoom.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/main.js}"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<!--<script>-->
+<!--    $(document).ready(function (){-->
+<!--        $('#price-min').val(1000000);-->
+<!--        $('#price-max').val(100000000);-->
+<!--        $('#product_filter').submit(function (event){-->
+<!--            let min_price = parseInt($('#price-min').val());-->
+<!--            let max_price = parseInt($('#price-max').val());-->
+<!--            let filter_brands = [];-->
+<!--            $('.brand_filter').each(function (i){-->
+<!--                if ($(this).is(':checked'))-->
+<!--                filter_brands[filter_brands.length] = $(this).val();-->
+<!--            });-->
+<!--            console.log(min_price);-->
+<!--            console.log(max_price);-->
+<!--            for (let i=0; i < filter_brands.length; i++) {-->
+<!--                console.log(i);-->
+<!--                console.log(filter_brands[i]);-->
+<!--            }-->
+<!--            let json = {-->
+<!--                'min_price': min_price,-->
+<!--                'max_price': max_price,-->
+<!--                'brands': filter_brands-->
+<!--            }-->
+<!--            $.ajax({-->
+<!--                headers: {-->
+<!--                    'Content-type' : 'application/json'-->
+<!--                },-->
+<!--                type : "POST",-->
+<!--                data : JSON.stringify(json),-->
+<!--                url : "/filter",-->
+<!--                success : function (){-->
+<!--                    alert('OK');-->
+<!--                }-->
+<!--            });-->
+<!--            event.preventDefault();-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
 
 </body>
 </html>
