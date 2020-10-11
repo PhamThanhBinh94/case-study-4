@@ -21,11 +21,11 @@ public class Customer {
     private String name;
 
     @NotBlank(message = "Please enter your email")
-    @Email(message = "")
+    @Email
     private String email;
 
     @NotBlank(message = "Please enter your address")
-    @Size(min = 15, max = 250)
+    @Size(min = 2, max = 250)
     private String address;
 
     public String getEmail() {
