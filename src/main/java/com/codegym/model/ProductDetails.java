@@ -11,6 +11,7 @@ import javax.persistence.Table;
 @Table(name = "product_details")
 @Data
 public class ProductDetails {
+
     @Id
     @Column(columnDefinition = "varchar(15)")
     private String productId;

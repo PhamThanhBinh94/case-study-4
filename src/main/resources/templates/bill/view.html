@@ -89,7 +89,7 @@
         <table border="1" cellpadding="5" class="table table-hover col-md-3 ">
             <tr class="thead-dark">
                 <th>NO</th>
-                <th>Product ID</th>
+                <th>Product</th>
                 <th>Amount</th>
                 <th>Unit price</th>
             </tr>
@@ -99,12 +99,15 @@
                 <td  th:text="${details.productId}"></td>
                 <td  th:text="${details.amount}"></td>
                 <td  th:text="${details.unit_price}"></td>
+                <td type="hidden" th:text="${(details.amount * details.unit_price)}"></td>
             </tr>
-            </th:block>
+                </th:block>
+                <th:block th:each="details,state : ${billDetails}">
             <tr>
                 <td>Total</td>
-                <td colspan="3"></td>
+                <td colspan="3" th:text="${(details.amount * details.unit_price)}"></td>
             </tr>
+            </th:block>
         </table>
 </div>
 </body>
