@@ -16,7 +16,7 @@ public interface BillRepository extends PagingAndSortingRepository<Bill, Long> {
 
     Page<Bill> findAllByBillId(Long id, Pageable pageable);
 
-    Page<Bill> sortBillByBillId(Long id, Pageable pageable);
-
-    Page<Bill> sortBillByDateOrStatus(Date date, String Status, Pageable pageable);
+//    Page<Bill> sortBillByBillId(Long id, Pageable pageable);
+//
+//    Page<Bill> sortBillByDateOrStatus(Date date, String Status, Pageable pageable);
 }

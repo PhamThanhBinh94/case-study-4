@@ -219,6 +219,7 @@
                     </div>
                     <div class="form-group">
                         <input id="customerName" class="input" type="text" name="first-name" placeholder="Name">
+                        <small></small>
                     </div>
 <!--                    <div class="form-group">-->
 <!--                        <input class="input" type="text" name="last-name" placeholder="Last Name">-->
@@ -534,28 +535,40 @@
         let email = $('#customerEmail').val();
         let phone = $('#customerPhone').val();
         let address = $('#customerAddress').val();
-        let token = $("meta[name='_csrf']").attr("content");
-        let header = $("meta[name='_csrf_header']").attr("content");
-        let json = {
-            'name': name,
-            'email': email,
-            'phone': phone,
-            'address': address
-        }
-        console.log(json);
-        $.ajax({
-            headers:{
-                'Content-type': 'application/json'
-            },
-            type: "POST",
-            url: "/checkout/order",
-            data: JSON.stringify(json),
-            header: header,
-            token: token,
-            success:function (){
-                console.log('OK');
+        if(checkInput(name, email, phone, address)){
+            let token = $("meta[name='_csrf']").attr("content");
+            let header = $("meta[name='_csrf_header']").attr("content");
+            let json = {
+                'name': name,
+                'email': email,
+                'phone': phone,
+                'address': address
             }
-        })
+            console.log(json);
+            $.ajax({
+                headers:{
+                    'Content-type': 'application/json'
+                },
+                type: "POST",
+                url: "/checkout/order",
+                data: JSON.stringify(json),
+                header: header,
+                token: token,
+                success:function (){
+                    console.log('OK');
+                }
+            });
+        }
+
+        function checkInput(name, email, phone, address) {
+            if(name.trim() == ''){
+                let form_group = $('#customerName').parent();
+                form_group.find('small').html('Error');
+                return false;
+            } else {
+                return true;
+            }
+        }
     }
 </script>
 
