@@ -5,10 +5,15 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import javax.security.auth.login.Configuration;
+
 @Service
 public class SendEmailService {
     @Autowired
     private JavaMailSender javaMailSender;
+
+    @Autowired
+    private Configuration config;
 
     public void sendEmail(String to, String body, String topic) {
         System.out.println("Sending email.....");

@@ -74,10 +74,15 @@ public class BillController {
         for(BillDetail detail : billDetails){
             System.out.println(detail);
         }
+        int total = 0;
+        for (BillDetail detail : billDetails){
+            total += detail.getAmount() * detail.getUnit_price();
+        }
         Bill bill = billService.findByBillId(id);
         ModelAndView modelAndView = new ModelAndView("/bill/view");
         modelAndView.addObject("bill", bill);
         modelAndView.addObject("billDetails", billDetails);
+        modelAndView.addObject("total",total);
         return modelAndView;
     }
 

@@ -27,4 +27,6 @@ public interface ProductService {
 
 //    List<Product> findAllByTypeOrIdOrOrBrand(String type,String id,String brand);
     Page<Product> findByNameContaining(String q, Pageable pageable);
+
+    List<Product> filterProduct(Double LowestPrice, Double HighestPrice, List<String> brand);
 }

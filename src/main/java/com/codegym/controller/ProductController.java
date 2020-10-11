@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -50,7 +52,11 @@ public class ProductController {
     }
 
     @PostMapping("/create")
-    public ModelAndView saveProduct(@ModelAttribute("product") Product product){
+    public ModelAndView saveProduct(@Validated @ModelAttribute("products") Product product, BindingResult bindingResult){
+        if (bindingResult.hasFieldErrors()){
+        ModelAndView modelAndView = new ModelAndView("/product/create");
+        return modelAndView;
+        }
         productService.save(product);
         ModelAndView modelAndView = new ModelAndView("/product/create");
         modelAndView.addObject("products", new Product());
@@ -66,7 +72,11 @@ public class ProductController {
     }
 
     @PostMapping("/edit")
-    public ModelAndView updateProduct(@ModelAttribute("product") Product product) throws IOException {
+    public ModelAndView updateProduct(@Validated @ModelAttribute("products") Product product,BindingResult bindingResult) throws IOException {
+        if(bindingResult.hasFieldErrors()){
+            ModelAndView modelAndView = new ModelAndView("product/edit");
+            return modelAndView;
+        }
         productService.save(product);
         ModelAndView modelAndView = new ModelAndView("product/edit");
         modelAndView.addObject("products", new Product());

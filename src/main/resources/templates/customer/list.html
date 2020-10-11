@@ -14,10 +14,10 @@
     </style>
 </head>
 <body>
-<div class="container-fluid">
-    <header class="container-fluid">
+<div class="container-full">
+    <header class="container-full">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">ADMIN</a>
+<!--            <a class="navbar-brand" href="#">ADMIN</a>-->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -52,7 +52,10 @@
 <!--                    <input type="submit" value="Search">-->
                 </form>
             </div>
-                        <a th:href="@{/customers/create}" class="btn btn-success" role="button" style="float: right">Create new customer</a>
+            &ensp;
+            <div>
+                <a th:href="@{/customers/create}" class="btn btn-success" role="button" style="float: right">Create new customer</a>
+            </div>
         </nav>
     </header>
 </div>
@@ -70,7 +73,7 @@
 <!--    <input type="submit" value="Search">-->
 
     <table border="1" cellpadding="5" class="table col-md-6" align="center">
-        <thead>
+        <thead class="thead-dark">
         <tr>
             <th>No</th>
             <th>Phone</th>
@@ -88,8 +91,8 @@
             <td th:text="${customer.name}"></td>
             <td th:text="${customer.email}"></td>
             <td th:text="${customer.address}"></td>
-            <td><a th:href="@{/customers/edit/__${customer.phone}__}">Edit</a></td>
-            <td><a th:href="@{/customers/delete/__${customer.phone}__}">Delete</a></td>
+            <td><a th:href="@{/customers/edit/__${customer.phone}__}" class="btn btn-success" role="button">Edit</a></td>
+            <td><a th:href="@{/customers/delete/__${customer.phone}__}" class="btn btn-success" role="button">Delete</a></td>
         </tr>
         </tbody>
     </table>

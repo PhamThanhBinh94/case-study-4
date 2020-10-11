@@ -3,16 +3,19 @@ package com.codegym.controller;
 import com.codegym.model.Item;
 import com.codegym.model.Product;
 import com.codegym.model.ProductDetails;
+import com.codegym.model.ProductFilter;
 import com.codegym.service.ProductDetailsService;
 import com.codegym.service.ProductService;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.jackson.JsonComponent;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -47,14 +50,10 @@ public class HomeController {
     public ModelAndView store(@PathVariable String type, Pageable pageable){
         ModelAndView modelAndView = new ModelAndView("/main/store");
         Page<Product> products = productService.findAllByType(type,pageable);
+        modelAndView.addObject("filter",new ProductFilter());
         modelAndView.addObject("products",products);
         return modelAndView;
     }
-
-//    @GetMapping("/checkout")
-//    public String checkout(){
-//        return "main/checkout";
-//    }
 
     @GetMapping("/chi-tiet/{id}")
     public ModelAndView product(@PathVariable("id") String id){
@@ -68,6 +67,19 @@ public class HomeController {
         } else {
             modelAndView = new ModelAndView("main/blank");
         }
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/filter",method = RequestMethod.POST)
+    public ModelAndView filter(@ModelAttribute("filter") ProductFilter filter){
+        List<Product> productList = productService.filterProduct(filter.getMinPrice(),filter.getMaxPrice(), filter.getBrands());
+        System.out.println("Product list:");
+        for (Product product : productList){
+            System.out.println(product);
+        }
+        ModelAndView modelAndView = new ModelAndView("main/store");
+        modelAndView.addObject("products", productList);
+        modelAndView.addObject("filter",new ProductFilter());
         return modelAndView;
     }
 
