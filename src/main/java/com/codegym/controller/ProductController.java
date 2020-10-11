@@ -1,5 +1,6 @@
 package com.codegym.controller;
 
+import com.codegym.model.Customer;
 import com.codegym.model.Product;
 import com.codegym.model.ProductDetails;
 import com.codegym.service.ProductDetailsService;
@@ -88,4 +89,7 @@ public class ProductController {
         modelAndView.addObject("details",details);
         return modelAndView;
     }
+
+
+
 }

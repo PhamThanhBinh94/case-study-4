@@ -2,17 +2,23 @@ package com.codegym.controller;
 
 import com.codegym.model.Product;
 import com.codegym.model.ProductDetails;
+import com.codegym.model.ProductFilter;
 import com.codegym.service.ProductDetailsService;
 import com.codegym.service.ProductService;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.jackson.JsonComponent;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class HomeController {
@@ -41,14 +47,10 @@ public class HomeController {
     public ModelAndView store(@PathVariable String type, Pageable pageable){
         ModelAndView modelAndView = new ModelAndView("/main/store");
         Page<Product> products = productService.findAllByType(type,pageable);
+        modelAndView.addObject("filter",new ProductFilter());
         modelAndView.addObject("products",products);
         return modelAndView;
     }
-
-//    @GetMapping("/checkout")
-//    public String checkout(){
-//        return "main/checkout";
-//    }
 
     @GetMapping("/chi-tiet/{id}")
     public ModelAndView product(@PathVariable("id") String id){
@@ -65,14 +67,29 @@ public class HomeController {
         return modelAndView;
     }
 
-    @GetMapping("/filter")
-    public ModelAndView filter(){
-        List<Product> productList = productService.filterProduct(10000000,15000000,"samsung");
+    @RequestMapping(value = "/filter",method = RequestMethod.POST)
+    public ModelAndView filter(@ModelAttribute("filter") ProductFilter filter){
+        List<Product> productList = productService.filterProduct(filter.getMinPrice(),filter.getMaxPrice(), filter.getBrands());
+        System.out.println("Product list:");
         for (Product product : productList){
             System.out.println(product);
         }
         ModelAndView modelAndView = new ModelAndView("main/store");
         modelAndView.addObject("products", productList);
+        modelAndView.addObject("filter",new ProductFilter());
+        return modelAndView;
+    }
+
+    @PostMapping("/search")
+    public ModelAndView listCustomers(@RequestParam("s") Optional<String> s, Pageable pageable){
+        Page<Product> products;
+        if(s.isPresent()){
+            products = productService.findByNameContaining(s.get(), pageable);
+        } else {
+            products = productService.findAll(pageable);
+        }
+        ModelAndView modelAndView = new ModelAndView("/main/blank");
+        modelAndView.addObject("products", products);
         return modelAndView;
     }
 }

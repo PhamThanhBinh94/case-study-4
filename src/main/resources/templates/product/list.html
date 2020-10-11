@@ -28,7 +28,6 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                         <a class="navbar-brand" href="http://localhost:8080/products">Sản phẩm<span class="sr-only">(current)</span></a>
                         <a class="navbar-brand" href="http://localhost:8080/customers">Khách hàng <span class="sr-only">(current)</span></a>
                         <a class="navbar-brand" href="http://localhost:8080/bill">Hóa đơn<span class="sr-only">(current)</span></a>
-                        <a class="navbar-brand" href="http://localhost:8080/logout">Đăng xuất<span class="sr-only">(current)</span></a>
                     </li>
 <!--                    <li class="nav-item">-->
 <!--                        <a class="nav-link" href="#">Link</a>-->
@@ -50,12 +49,10 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <!--                    <li class="nav-item"><a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>-->
 <!--                    </li>-->
                 </ul>
-                <div >
                     <form class="form-inline my-2 my-lg-0">
                         <input class="form-control mr-sm-2" name="s" type="text" th:value="${keyword}" placeholder="Id, Brand, Type">
                         <button  class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm sản phẩm</button>
                     </form>
-                </div>
             </div>
             <div >
                 <a href="/products/create" class="btn btn-success" role="button" style="float: right">Create new product</a>
@@ -63,6 +60,15 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
         </nav>
     </header>
+</div>
+
+<!--        <form>-->
+<!--            <label><h4>Search by: </h4></label>-->
+<!--            <input name="s" type="text" th:value="${keyword}" placeholder="Id, Brand, Type">-->
+<!--            <input type="submit" value="Search"/>-->
+<!--        </form>-->
+
+<div>
     </br>
     <center>
         <h2 style="float: contour" >Danh sách sản phẩm</h2>
@@ -118,6 +124,5 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     </div>
 
 </div>
-
 </body>
 </html>
