@@ -125,7 +125,7 @@
                                             <div class="product-body">
                                                 <h3 class="product-name"><a href="#" th:text="${item.product.name}"></a></h3>
                                                 <h4 class="product-price">
-                                                    <input type="number" th:value="${item.quantity}" name="quantity" style="width: 50px;"/><a th:href="${'/checkout/remove/' + item.product.id}">X</a>
+                                                    <input type="number" th:value="${item.quantity}" name="quantity" style="width: 50px;"/><a th:href="${'/favoritesList/remove/' + item.product.id}">X</a>
                                                     <span th:text="${#numbers.formatDecimal(item.product.price * item.quantity,3,'POINT',0,'COMMA')}"></span>
                                                 </h4>
                                             </div>
@@ -316,7 +316,7 @@
 <!--                <div class="section-title text-center">-->
 <!--                    <h3 class="title">Your Order</h3>-->
 <!--                </div>-->
-                <form method="post" th:action="${'/checkout/update'}">
+                <form method="post" th:action="${'/favoritesList/update'}">
                     <div class="order-summary">
                         <div class="order-col">
                             <div><strong>SẢN PHẨM</strong></div>
@@ -341,7 +341,7 @@
                         <div><input type="submit" value="Cập nhật"></div>
                         <div class="order-col">
                             <div><strong>TỔNG</strong></div>
-                            <div><strong class="order-total"><span th:text="${#numbers.formatDecimal(total1,3,'POINT',0,'COMMA')}"></span></strong></div>
+                            <div><strong class="order-total"><span th:text="${#numbers.formatDecimal(totalFavorite,3,'POINT',0,'COMMA')}"></span></strong></div>
                         </div>
                     </div>
                 </form>
