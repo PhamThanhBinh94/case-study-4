@@ -1,5 +1,6 @@
 package com.codegym.controller;
 
+import com.codegym.model.Item;
 import com.codegym.model.Product;
 import com.codegym.model.ProductDetails;
 import com.codegym.model.ProductFilter;
@@ -17,6 +18,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

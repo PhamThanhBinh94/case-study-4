@@ -315,7 +315,7 @@
                                         </div>
                                         <div class="product-body">
                                             <p class="product-category" th:text="${product.brand}"></p>
-                                            <h3 class="product-name"><a th:href="@{/chi-tiet/__${product.id}__}"  th:text="${product.name}"></a></h3>
+                                            <h3 class="product-name"><a th:href="@{/chi-tiet/__${product.id}__}" th:text="${product.name}"></a></h3>
                                             <h4 class="product-price" th:text="${#numbers.formatDecimal(product.price,3,'POINT',0,'COMMA')}"><del class="product-old-price" th:text="${#numbers.formatDecimal(product.price,3,'POINT',0,'COMMA')}"></del></h4>
                                             <div class="product-rating">
                                                 <i class="fa fa-star"></i>
@@ -325,7 +325,7 @@
                                                 <i class="fa fa-star"></i>
                                             </div>
                                             <div class="product-btns">
-                                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                                <button class="add-to-wishlist"><a th:href="@{/favoritesList/display/__${product.id}__}"><i class="fa fa-heart-o"></i></a><span class="tooltipp">add to wishlist</span></button>
                                                 <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
                                                 <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
                                             </div>
@@ -367,7 +367,7 @@
                                                 <i class="fa fa-star"></i>
                                             </div>
                                             <div class="product-btns">
-                                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                                <button class="add-to-wishlist"><a th:href="@{/favoritesList/display/__${product.id}__}"><i class="fa fa-heart-o"></i></a><span class="tooltipp">add to wishlist</span></button>
                                                 <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
                                                 <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
                                             </div>
@@ -409,7 +409,7 @@
                                                 <i class="fa fa-star"></i>
                                             </div>
                                             <div class="product-btns">
-                                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                                <button class="add-to-wishlist"><a th:href="@{/favoritesList/display/__${product.id}__}"><i class="fa fa-heart-o"></i></a><span class="tooltipp">add to wishlist</span></button>
                                                 <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
                                                 <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
                                             </div>
@@ -451,7 +451,7 @@
                                                 <i class="fa fa-star"></i>
                                             </div>
                                             <div class="product-btns">
-                                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                                <button class="add-to-wishlist"><a th:href="@{/favoritesList/display/__${product.id}__}"><i class="fa fa-heart-o"></i></a><span class="tooltipp">add to wishlist</span></button>
                                                 <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
                                                 <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
                                             </div>
@@ -575,7 +575,7 @@
                                                 <i class="fa fa-star"></i>
                                             </div>
                                             <div class="product-btns">
-                                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                                <button class="add-to-wishlist"><a th:href="@{/favoritesList/display/__${product.id}__}"><i class="fa fa-heart-o"></i></a><span class="tooltipp">add to wishlist</span></button>
                                                 <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
                                                 <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
                                             </div>
@@ -616,7 +616,7 @@
                                                 <i class="fa fa-star"></i>
                                             </div>
                                             <div class="product-btns">
-                                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                                <button class="add-to-wishlist"><a th:href="@{/favoritesList/display/__${product.id}__}"><i class="fa fa-heart-o"></i></a><span class="tooltipp">add to wishlist</span></button>
                                                 <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
                                                 <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
                                             </div>
@@ -657,7 +657,7 @@
                                                 <i class="fa fa-star"></i>
                                             </div>
                                             <div class="product-btns">
-                                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                                <button class="add-to-wishlist"><a th:href="@{/favoritesList/display/__${product.id}__}"><i class="fa fa-heart-o"></i></a><span class="tooltipp">add to wishlist</span></button>
                                                 <button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
                                                 <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
                                             </div>
@@ -704,7 +704,7 @@
                                             </div>
                                         </div>
                                         <div class="add-to-cart">
-                                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i><a th:href="${'/checkout/buy/' + product.id}">add to cart</a></button>
+                                            <button class="add-to-cart-btn"><a th:href="@{/favoritesList/display/__${product.id}__}"><i class="fa fa-heart-o"></i></a>add to cart</button>
                                         </div>
                                     </div>
                                     <!-- /product -->

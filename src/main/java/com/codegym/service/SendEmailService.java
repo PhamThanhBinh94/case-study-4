@@ -12,8 +12,8 @@ public class SendEmailService {
     @Autowired
     private JavaMailSender javaMailSender;
 
-    @Autowired
-    private Configuration config;
+//    @Autowired
+//    private Configuration config;
 
     public void sendEmail(String to, String body, String topic) {
         System.out.println("Sending email.....");
