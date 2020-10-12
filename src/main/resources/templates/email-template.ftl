@@ -17,11 +17,11 @@
 </div>
 <div style="padding: 5px">
     <table width="100%" style="font-family: Arial; text-align: center">
-        <tr style="background-color: #D10024; color: #f5f5f5; padding: 8px; border: 1px solid black">
-            <th width="20%">Sản phẩm</th>
+        <tr style="background-color: #D10024; color: #f5f5f5; padding: 10px; border: 1px solid black">
+            <th width="30%">Sản phẩm</th>
             <th width="40%">Mô tả</th>
-            <th width="20%">Số lượng</th>
-            <th width="20%">Đơn giá</th>
+            <th width="15%">Số lượng</th>
+            <th width="15%">Đơn giá</th>
         </tr>
         ${billDetails}
     </table>

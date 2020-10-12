@@ -60,10 +60,12 @@ public class HomeController {
         ModelAndView modelAndView;
         Product product = productService.findById(id);
         if(product != null) {
+            List<Product> productList = productService.findFirst6ByType(product.getType());
             modelAndView = new ModelAndView("main/product");
             modelAndView.addObject("product",product);
             ProductDetails details = detailsService.findDetailById(id);
             modelAndView.addObject("details",details);
+            modelAndView.addObject("products", productList);
         } else {
             modelAndView = new ModelAndView("main/blank");
         }

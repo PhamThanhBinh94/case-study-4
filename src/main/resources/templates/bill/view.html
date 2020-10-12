@@ -60,23 +60,23 @@
     <table align="center" border="1" cellpadding="5" class="table table-hover col-md-3" >
         <th:block th:each="bill : ${bill}">
             <tr>
-                <th class="thead-dark">Bill Id:</th>
+                <th style="background-color: #15161D; color: #f5f5f5">Bill Id:</th>
                 <td th:text="${bill.getBillId()}"></td>
             </tr>`
             <tr>
-                <th class="thead-dark">Customer Id:</th>
+                <th style="background-color: #15161D; color: #f5f5f5">Customer Id:</th>
                 <td th:text="${bill.getCustomerId()}"></td>
             </tr>
             <tr>
-                <th class="thead-dark">Date:</th>
+                <th style="background-color: #15161D; color: #f5f5f5">Date:</th>
                 <td  th:text="${bill.getDate()}"></td>
             </tr>
             <tr>
-                <th class="thead-dark">Address:</th>
+                <th style="background-color: #15161D; color: #f5f5f5">Address:</th>
                 <td  th:text="${bill.getAddress()}"></td>
             </tr>
             <tr>
-                <th class="thead-dark">Status:</th>
+                <th style="background-color: #15161D; color: #f5f5f5">Status:</th>
                 <td  th:text="${bill.getStatus()}"></td>
             </tr>
         </th:block>
@@ -96,9 +96,9 @@
             <th:block th:each="details,state : ${billDetails}">
             <tr>
                 <td th:text="${state.count}"></td>
-                <td  th:text="${details.productId}"></td>
-                <td  th:text="${details.amount}"></td>
-                <td  th:text="${details.unit_price}"></td>
+                <td><a th:href="@{/products/view/__${details.getProductId()}__}" th:text="${details.productId}"></a></td>
+                <td th:text="${details.amount}"></td>
+                <td th:text="${details.unit_price}"></td>
 <!--                <td type="hidden" th:text="${(details.amount * details.unit_price)}"></td>-->
             </tr>
                 </th:block>

@@ -17,7 +17,7 @@
 <div class="container-full">
     <header class="container-full">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-<!--            <a class="navbar-brand" href="#">ADMIN</a>-->
+            <!--            <a class="navbar-brand" href="#">ADMIN</a>-->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -44,65 +44,55 @@
                         </div>
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0" th:action="@{/customers/search}" method="get">
-<!--                    <input class="form-control mr-sm-2" name="s" type="text" placeholder="">-->
-<!--                    <button  class="btn btn-outline-success my-2 my-sm-0" type="submit" th:placeholder="BillID">Tìm kiếm</button>-->
-                    <input class="form-control mr-sm-2" type="text" name="s" >
-                    <button  class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
-<!--                    <input type="submit" value="Search">-->
-                </form>
-            </div>
-            &ensp;
-            <div>
-                <a th:href="@{/customers/create}" class="btn btn-success" role="button" style="float: right">Create new customer</a>
             </div>
         </nav>
     </header>
 </div>
-<!--<a th:href="@{/customers/create}">Add new customer</a>-->
-<!--<form th:action="@{/customers/search}" method="get">-->
 <div>
     <br/>
     <center>
-        <h1>Danh sách khách hàng</h1>
+        <h1>Lịch sử mua hàng</h1>
     </center>
     <br/>
 </div>
-<form>
-<!--    <input type="text" name="s" >-->
-<!--    <input type="submit" value="Search">-->
-
+    <table class="table col-md-4" align="center" border="1" cellpadding="5">
+        <tr>
+            <th style="background-color: #15161D; color: #f5f5f5">Khách hàng:</th>
+            <td th:text="${customer.name}"></td>
+        </tr>
+        <tr>
+            <th style="background-color: #15161D; color: #f5f5f5">SĐT:</th>
+            <td th:text="${customer.phone}"></td>
+        </tr>
+        <tr>
+            <th style="background-color: #15161D; color: #f5f5f5">Email:</th>
+            <td th:text="${customer.email}"></td>
+        </tr>
+        <tr>
+            <th style="background-color: #15161D; color: #f5f5f5">Địa chỉ:</th>
+            <td th:text="${customer.address}"></td>
+        </tr>
+    </table>
+<br/>
     <table border="1" cellpadding="5" class="table col-md-6" align="center">
         <thead class="thead-dark">
         <tr>
-            <th>No</th>
-            <th>Phone</th>
-            <th>Name</th>
-            <th>Email</th>
+            <th>Bill ID</th>
+            <th>Create Date</th>
             <th>Address</th>
-            <th>History</th>
-            <th>Edit</th>
-            <th>Delete</th>
+            <th>Status</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="customer,iterStat : ${customers}">
-            <td th:text="${iterStat.count}"></td>
-            <td th:text="${customer.phone}"></td>
-            <td th:text="${customer.name}"></td>
-            <td th:text="${customer.email}"></td>
-            <td th:text="${customer.address}"></td>
-            <td><a th:href="@{/customers/history/__${customer.phone}__}" class="btn btn-success" role="button">View</a></td>
-            <td><a th:href="@{/customers/edit/__${customer.phone}__}" class="btn btn-success" role="button">Edit</a></td>
-            <td><a th:href="@{/customers/delete/__${customer.phone}__}" class="btn btn-success" role="button">Delete</a></td>
-        </tr>
+            <th:block th:each="bill : ${bills}">
+                <tr>
+                    <td><a th:href="@{/bill/view/__${bill.getBillId()}__}" th:text="${bill.billId}"></a></td>
+                    <td th:text="${bill.date}"></td>
+                    <td th:text="${bill.address}"></td>
+                    <td th:text="${bill.status}"></td>
+                </tr>
+            </th:block>
         </tbody>
     </table>
-    <div>
-        <a th:href="@{'/customers'(page=${customers.number - 1})}" th:if="${customers.hasPrevious()}">Previous</a>
-        <span th:text="${customers.number + 1}"></span>/<span th:text="${customers.totalPages}"></span>
-        <a th:href="@{'/customers'(page=${customers.number + 1})}" th:if="${customers.hasNext()}">Next</a>
-    </div>
-</form>
 </body>
 </html>

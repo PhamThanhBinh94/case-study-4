@@ -18,11 +18,7 @@ public interface BillService {
 
     Bill findByBillId(Long id);
 
-    Page<Bill> findAllByBillIdOrCustomerIdOrStatus(Long billId,String customerId ,String status, Pageable pageable);
-
     Page<Bill> findAllByBillId(Long id, Pageable pageable);
 
-//    List<Bill> findFirst6ByType(String type);
-//
-//    Page<Bill> findAllByType(String type, Pageable pageable);
+    Page<Bill> findAllByCustomerIdOrderByDateDesc(String id, Pageable pageable);
 }

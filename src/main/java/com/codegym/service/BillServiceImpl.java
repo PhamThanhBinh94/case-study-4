@@ -39,12 +39,12 @@ public class BillServiceImpl implements BillService {
     }
 
     @Override
-    public Page<Bill> findAllByBillIdOrCustomerIdOrStatus(Long billId, String customerId, String status, Pageable pageable) {
-        return billRepository.findAllByBillIdOrCustomerIdOrStatus(billId, customerId, status, pageable);
+    public Page<Bill> findAllByBillId(Long id, Pageable pageable) {
+        return billRepository.findAllByBillId(id, pageable);
     }
 
     @Override
-    public Page<Bill> findAllByBillId(Long id, Pageable pageable) {
-        return billRepository.findAllByBillId(id, pageable);
+    public Page<Bill> findAllByCustomerIdOrderByDateDesc(String phone, Pageable pageable) {
+        return billRepository.findAllByCustomerIdOrderByDateDesc(phone, pageable);
     }
 }

@@ -10,6 +10,64 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div class="container-full">
+    <header class="container-full">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <!--            <div sec:authorize="isAuthenticated()">-->
+            <!--                <a class="navbar-brand" href="/products/"><span sec:authentication="principal.username"></span></a>-->
+            <!--            </div>-->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="navbar-brand" href="http://localhost:8080/products">Sản phẩm<span class="sr-only">(current)</span></a>
+                        <a class="navbar-brand" href="http://localhost:8080/customers">Khách hàng <span class="sr-only">(current)</span></a>
+                        <a class="navbar-brand" href="http://localhost:8080/bill">Hóa đơn<span class="sr-only">(current)</span></a>
+                    </li>
+                    <!--                    <li class="nav-item">-->
+                    <!--                        <a class="nav-link" href="#">Link</a>-->
+                    <!--                    </li>-->
+                    <li class="nav-item dropdown ">
+                        <a class="nav-link dropdown-toggle navbar-brand" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Sản phẩm
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/products">Toàn bộ sản phẩm</a>
+                            <a class="dropdown-item" href="/products?s=tivi">Tivi</a>
+                            <a class="dropdown-item" href="/products?s=tu-lanh">Tủ lạnh</a>
+                            <a class="dropdown-item" href="/products?s=dieu-hoa-nhiet-do">Điều hòa</a>
+                            <a class="dropdown-item" href="/products?s=may-giat">Máy giặt</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Khác</a>
+                        </div>
+                    </li>
+                    <!--                    <li class="nav-item"><a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>-->
+                    <!--                    </li>-->
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" name="s" type="text" th:value="${keyword}" placeholder="Id, Brand, Type">
+                    <button  class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm sản phẩm</button>
+                </form>
+            </div>
+            &ensp;
+            <div >
+                <a href="/products/create" class="btn btn-success" role="button" style="float: right">Create new product</a>
+            </div>
+            &nbsp;
+            <div >
+                <a th:href="@{/logout}" class="btn btn-danger" role="button" style="float: right">Logout</a>
+            </div>
+        </nav>
+    </header>
+</div>
+<div align="center">
+    <br/>
+    <h3>Thông tin sản phẩm</h3>
+    <br/>
+</div>
 <table class="table" border="1">
     <tr>
         <th>ID:</th>
@@ -60,13 +118,13 @@
         general = general.replaceAll('__ <info>','</td></tr><tr><td>').replace('<info>','<tr><td>').replaceAll('__ ','</td><td>').replace('__','</td></tr>').replace('<td> <info>','<tr><td>');
         let render_table = '<table class="table" border="1">\n' +
             '    <tr style="background-color: #1e1f29; color: ghostwhite;">\n' +
-            '        <th colspan="2">Feature:</th>\n' +
+            '        <th colspan="2">Đặc điểm:</th>\n' +
             '    </tr>\n' + feature +
             '\n';
         if (technology != ''){
             technology = technology.replaceAll('__ <info>','</td></tr><tr><td>').replace('<info>','<tr><td>').replaceAll('__ ','</td><td>').replace('__','</td></tr>').replace('<td> <info>','<tr><td>');
             render_table += '    <tr style="background-color: #1e1f29; color: ghostwhite;">\n' +
-                '        <th colspan="2">Technology:</th>\n' +
+                '        <th colspan="2">Công nghệ:</th>\n' +
                 '    </tr>\n' + technology +
                 '\n';
         }
@@ -74,7 +132,7 @@
         console.log(technology);
         console.log(general);
         render_table += '    <tr style="background-color: #1e1f29; color: ghostwhite;">\n' +
-            '        <th colspan="2">General Info:</th>\n' +
+            '        <th colspan="2">Thông tin chung:</th>\n' +
             '    </tr>\n' + general +
             '\n' +
             '</table>';

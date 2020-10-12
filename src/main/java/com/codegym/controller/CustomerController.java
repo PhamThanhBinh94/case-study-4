@@ -1,6 +1,8 @@
 package com.codegym.controller;
 
+import com.codegym.model.Bill;
 import com.codegym.model.Customer;
+import com.codegym.service.BillService;
 import com.codegym.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +22,9 @@ import java.util.Optional;
 public class CustomerController {
     @Autowired
     CustomerService customerService;
+
+    @Autowired
+    private BillService billService;
 
     @GetMapping("")
     public ModelAndView index(@PageableDefault(size = 5) Pageable pageable){
@@ -86,6 +91,16 @@ public class CustomerController {
         }
         ModelAndView modelAndView = new ModelAndView("/customer/list");
         modelAndView.addObject("customers", customers);
+        return modelAndView;
+    }
+
+    @GetMapping("/history/{phone}")
+    public ModelAndView viewHistory(@PathVariable String phone, Pageable pageable){
+        ModelAndView modelAndView = new ModelAndView("customer/history");
+        Page<Bill> bills = billService.findAllByCustomerIdOrderByDateDesc(phone, pageable);
+        Customer customer = customerService.findById(phone);
+        modelAndView.addObject("bills",bills);
+        modelAndView.addObject("customer",customer);
         return modelAndView;
     }
 }

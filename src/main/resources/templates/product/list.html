@@ -38,10 +38,10 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="/products">Toàn bộ sản phẩm</a>
-                            <a class="dropdown-item" href="/products?type=tivi">Tivi</a>
-                            <a class="dropdown-item" href="/products?type=tu-lanh">Tủ lạnh</a>
-                            <a class="dropdown-item" href="/products?type=dieu-hoa-nhiet-do">Điều hòa</a>
-                            <a class="dropdown-item" href="/products?type=may-giat">Máy giặt</a>
+                            <a class="dropdown-item" href="/products?s=tivi">Tivi</a>
+                            <a class="dropdown-item" href="/products?s=tu-lanh">Tủ lạnh</a>
+                            <a class="dropdown-item" href="/products?s=dieu-hoa-nhiet-do">Điều hòa</a>
+                            <a class="dropdown-item" href="/products?s=may-giat">Máy giặt</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Khác</a>
                         </div>
@@ -55,18 +55,15 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                     </form>
             </div>
             &ensp;
-            <div >
+            <div>
                 <a href="/products/create" class="btn btn-success" role="button" style="float: right">Create new product</a>
+            </div>&nbsp;
+            <div>
+                <a th:href="@{/logout}" class="btn btn-danger" role="button" style="float: right">Logout</a>
             </div>
         </nav>
     </header>
 </div>
-
-<!--        <form>-->
-<!--            <label><h4>Search by: </h4></label>-->
-<!--            <input name="s" type="text" th:value="${keyword}" placeholder="Id, Brand, Type">-->
-<!--            <input type="submit" value="Search"/>-->
-<!--        </form>-->
 
 <div>
     </br>
@@ -75,9 +72,6 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     </center>
     </br>
 </div>
-
-
-
 
 <div class="container">
     <table class="table" border="1">
