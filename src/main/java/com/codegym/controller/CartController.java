@@ -11,11 +11,14 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/checkout")
 public class CartController {
+    public static final String FROM_EMAIL = "langquang1995@gmail.com";
     @Autowired
     private CustomerService customerService;
 
@@ -108,14 +111,12 @@ public class CartController {
     @RequestMapping(value = "/order", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public void order(HttpSession session,@RequestBody Customer customer) {
-        String mail_body = "";
         customerService.save(customer);
         Bill bill = new Bill();
         bill.setCustomerId(customer.getPhone());
         bill.setAddress(customer.getAddress());
         bill.setStatus("Waiting confirm!");
         billService.save(bill);
-        mail_body += customer.toString() + "\n" + bill.toString() + "\n";
         List<Item> cart = (List<Item>) session.getAttribute("cart");
         for (Item item : cart) {
             Product product = productService.findById(item.getProduct().getId());
@@ -126,11 +127,40 @@ public class CartController {
             billDetail.setUnit_price(item.getProduct().getPrice());
             billDetail.setProductId(item.getProduct().getId());
             billDetail.setAmount(item.getQuantity());
-            mail_body += billDetail.toString();
             billDetailService.save(billDetail);
         }
-        String topic = "Xác nhận đơn hàng";
-        System.out.println("Sending email");
-        sendEmailService.sendEmail(customer.getEmail(), mail_body,topic);
+
+        MailRequest mailRequest = new MailRequest();
+        mailRequest.setName(customer.getName());
+        mailRequest.setTo(customer.getEmail());
+        mailRequest.setSubject("Xác nhận đơn hàng #" + bill.getBillId());
+        mailRequest.setFrom(FROM_EMAIL);
+
+        String billHTML = "";
+
+
+        List<BillDetail> billDetails = billDetailService.findAllByBillId(bill.getBillId());
+        int total = 0;
+        for(BillDetail detail : billDetails){
+            Product product = productService.findById(detail.getProductId());
+            billHTML += "<tr style=\"border: 1px solid black\">\n" +
+                    "            <td><img src='"+ product.getImage() +"'></td>\n" +
+                    "            <td>"+ product.getName() +"</td>\n" +
+                    "            <td>"+ detail.getAmount() +"</td>\n" +
+                    "            <td>"+ detail.getUnit_price() +"</td>\n" +
+                    "        </tr>";
+            total += detail.getAmount() * detail.getUnit_price();
+        }
+
+        Map<String, Object> model = new HashMap<>();
+        model.put("customerName", customer.getName());
+        model.put("billId", bill.getBillId());
+        model.put("customerAddress",customer.getAddress());
+        model.put("customerPhone",customer.getPhone());
+        model.put("total",total);
+        model.put("billDetails", billHTML);
+
+        sendEmailService.sendEmail(mailRequest, model);
+
     }
 }

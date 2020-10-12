@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BillDetailServiceImpl implements BillDetailService {
     @Autowired
@@ -16,9 +18,15 @@ public class BillDetailServiceImpl implements BillDetailService {
 
     @Autowired
     private BillRepository billRepository;
+
     @Override
     public Page<BillDetail> findAllByBillId(Long id, Pageable pageable) {
         return billDetailRepository.findBillDetailsByBillId(id, pageable);
+    }
+
+    @Override
+    public List<BillDetail> findAllByBillId(Long id) {
+        return billDetailRepository.findBillDetailsByBillId(id);
     }
 
     @Override

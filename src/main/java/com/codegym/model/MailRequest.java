@@ -3,9 +3,9 @@ package com.codegym.model;
 import lombok.Data;
 
 @Data
-public class mailRequest {
+public class MailRequest {
     private String name;
     private String to;
-    private String form;
+    private String from;
     private String subject;
 }
